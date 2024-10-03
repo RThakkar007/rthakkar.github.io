@@ -13,6 +13,6 @@ Udemy Certification URLs :
 Description :
 This certificate above verifies that Ronak Thakkar successfully completed the course Assertiveness Basics: The 50-minute Communication Guide on 10/03/2024 as taught by Dr. Roy Naraine, Adam Naraine, Jimmy Naraine • Official Udemy Partner on Udemy. The certificate indicates the entire course was completed as validated by the student. The course duration represents the total video hours of the course at time of most recent completion.
 
-- [Certification]()
-- [Certification]()
+- [Certification Test]()
+- [Certification Test]()
 
