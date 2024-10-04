@@ -1,6 +1,38 @@
-ISTQB Notes...
-
 ISTQB Prep:
+
+06]  Managing the Test Activities v4
+
+7] Corrective actions taken do not have to be testing related.
+
+For example, test control could suggest
+
+the scoping of functionality
+
+such as removing some less important planned deliverables
+
+from the initial delivered solution
+
+reduces the time and effort required
+
+to achieve that solution.
+
+Delaying release into the production environment
+
+until exit criteria have been met.
+
+We'll talk about test progress reports in a future video.
+
+Test Completion.
+
+Test completion collects data from completed test activities
+
+to consolidate experience, testware,
+
+and any other relevant information.
+
+Test completion activities take place at various points
+
+throughout a project, such as to the end of a test level, an Agile iteration, the end of a test project, the release of a software system, the end of maintenance releaseeven after a project is canceled.
 
 *Product risks* are associated with specific quality characteristics of a product; for example, functional suitability, reliability, performance efficiency, usability, security, comfortability, maintainability and portability.
 
