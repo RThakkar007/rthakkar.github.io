@@ -13,6 +13,18 @@ Udemy Certification URLs :
 Description :
 This certificate above verifies that Ronak Thakkar successfully completed the course Assertiveness Basics: The 50-minute Communication Guide on 10/03/2024 as taught by Dr. Roy Naraine, Adam Naraine, Jimmy Naraine • Official Udemy Partner on Udemy. The certificate indicates the entire course was completed as validated by the student. The course duration represents the total video hours of the course at time of most recent completion.
 
-- [Certification Test]()
-- [Certification Test]()
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
+This certificate above verifies that Ronak Thakkar successfully completed the course ISTQB Foundation Level (CTFL) V4.0 updated 2024 on 10/05/2024 as taught by Maged Koshty on Udemy. The certificate indicates the entire course was completed as validated by the student. The course duration represents the total video hours of the course at time of most recent completion.
+
+- [ISTQB Foundation Level (CTFL) V4.0 updated 2024 on 10/05/2024 as taught by Maged Koshty on Udemy.pdf](https://udemy-certificate.s3.amazonaws.com/pdf/UC-0c9cf432-b956-4156-83fe-ddc3486e33a3.pdf)
+- [ISTQB Foundation Level (CTFL) V4.0 updated 2024 on 10/05/2024 as taught by Maged Koshty on Udemy.jpg](https://udemy-certificate.s3.amazonaws.com/image/UC-0c9cf432-b956-4156-83fe-ddc3486e33a3.jpg)
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+This certificate above verifies that Ronak Thakkar successfully completed the course ISTQB Advanced Level Agile Technical Tester (ATT) on 10/07/2024 as taught by Maged Koshty, Scottie Crump on Udemy. The certificate indicates the entire course was completed as validated by the student. The course duration represents the total video hours of the course at time of most recent completion.
+
+- [ISTQB Advanced Level Agile Technical Tester (ATT) on 10/07/2024 as taught by Maged Koshty, Scottie Crump on Udemy.jpg](https://udemy-certificate.s3.amazonaws.com/image/UC-62470d60-a0fe-4f05-abbe-db40211792cc.jpg)
+- [ISTQB Advanced Level Agile Technical Tester (ATT) on 10/07/2024 as taught by Maged Koshty, Scottie Crump on Udemy.jpg](https://udemy-certificate.s3.amazonaws.com/pdf/UC-62470d60-a0fe-4f05-abbe-db40211792cc.pdf)
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
