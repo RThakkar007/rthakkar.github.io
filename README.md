@@ -36,3 +36,9 @@ This certificate above verifies that Ronak Thakkar successfully completed the co
 - [ISTQB Advanced Level Agile Technical Tester (ATT) on 10/07/2024 as taught by Maged Koshty, Scottie Crump on Udemy.pdf](https://udemy-certificate.s3.amazonaws.com/pdf/UC-62470d60-a0fe-4f05-abbe-db40211792cc.pdf)
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Resume Keywords
+TestRail
+
+
+
