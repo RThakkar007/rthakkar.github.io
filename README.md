@@ -53,19 +53,16 @@ This certificate above verifies that RonaK Thakkar successfully completed the co
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-An online course to get ready and practice questions for the **ISTQB® Advanced Level Test Manager certification (CTAL-TM)**
+ISTQB® Certified Tester Advanced Level - Test Manager (CTAL-TM)
+**ISTQB® Advanced Level Test Manager certification (CTAL-TM)**
+
 
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 **Postman - Learn API Testing from Scratch with Live Projects**
 
-
-
-
-
-
-
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 
 Resume Keywords
