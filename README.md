@@ -53,8 +53,17 @@ This certificate above verifies that RonaK Thakkar successfully completed the co
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-ISTQB® Certified Tester Advanced Level - Test Manager (CTAL-TM)
-**ISTQB® Advanced Level Test Manager certification (CTAL-TM)**
+
+
+This certificate above verifies that Ronakkumar Lalitbhai Thakkar successfully completed the course Certified **[ISTQB® Advanced Level Test Manager certification (CTAL-TM)](https://tm.udemy.com/certificate/UC-660e16f3-27d1-40d9-acf8-8bd9e017c56d/)** on 10/25/2024 as taught by Maged Koshty on Udemy. The certificate indicates the entire course was completed as validated by the student. The course duration represents the total video hours of the course at time of most recent completion.
+
+- [ISTQB® Test Manager Advanced Level Exam (CTAL-TM).Pdf](https://udemy-certificate.s3.amazonaws.com/pdf/UC-660e16f3-27d1-40d9-acf8-8bd9e017c56d.pdf)
+
+- [ISTQB® Test Manager Advanced Level Exam (CTAL-TM).jpg](https://udemy-certificate.s3.amazonaws.com/image/UC-660e16f3-27d1-40d9-acf8-8bd9e017c56d.jpg)
+
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
 
 
 
@@ -62,11 +71,8 @@ ISTQB® Certified Tester Advanced Level - Test Manager (CTAL-TM)
 
 **Postman - Learn API Testing from Scratch with Live Projects**
 
+
+
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-
-
-Resume Keywords
-TestRail
-
 
 
