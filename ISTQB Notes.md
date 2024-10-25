@@ -115,3 +115,45 @@ Act
 Document the results, inform others about process changes, and make
 
 
+Improving the Testing Process with TMMi
+
+IDEAL : 
+Level 1. Initial
+Level 2. Managed
+Level 3. Defined
+Level 4. Measured
+Level 5. Optimized
+
+The TPI Next model defines 16 key areas, each of
+
+which covers a specific aspect of the test process:
+
+1 Stakeholder commitment
+2 Degree of involvement Stakeholder Relations
+3 Test Strategy
+4 Test Organization
+5 Communication
+6 Reporting
+7 Test Process Management
+8 Estimating and Planning
+9 Metrics
+10 Defect Management
+11 Testware Management
+12 Methodology Practice
+13 Tester Professionalism
+14 Test Case Design
+15 Test Tools
+16 Test Environments
+
+TPI Next
+
+Improving the Testing Process with CTP(Contect-sensitive approach)
+
+- Identification of specific challenges
+- Recognition of attributes of good process
+- 
+
+
+**Custom Tools**
+
+
