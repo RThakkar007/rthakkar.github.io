@@ -94,4 +94,24 @@ the consistency or quality of project work products such as design, code, config
 Supplier issues:
 a third party may fail to deliver a necessary product or service, or go bankrupt;
 contractual issues may cause problems to the project; project risks may affect both development activities and test activities.
-In some cases, project managers are responsible for handling all project risks, but it's not unusual for test managers to have the responsibility for test-related project risks.
+In some cases, project managers are responsible for handling all project risks,
+but it's not unusual for test managers to have the responsibility for test-related project risks.
+
+Learning from one's own mistakes makes it possible to improve the process that organizations are using to develop and test software.
+
+One of th mst famous improvement techniques is The Deming improvement cycle: Plan, Do, Check, Act, or PDCA .
+
+PDCA is an iterative four-step management method used in business for the control and continual improvement of processes and products.
+
+Plan
+Define the problem to be addressed, collect relevant data, and ascertain the problem's root cause.
+
+Do
+Develop and implement a solution; decide upon a measurement to measure its effectiveness.
+Check
+Confirm the results through before-and-after data comparison.
+
+Act
+Document the results, inform others about process changes, and make
+
+
