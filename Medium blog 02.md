@@ -17,4 +17,3 @@ https://medium.com/p/825378bbca51/edit
 https://medium.com/@rl00831846/mastering-agile-in-the-ai-era-certification-and-trends-you-need-to-know-f77b510863dc
 
 
-
