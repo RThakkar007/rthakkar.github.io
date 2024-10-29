@@ -76,3 +76,6 @@ This certificate above verifies that Ronakkumar Lalitbhai Thakkar successfully c
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 
+Medium Blog
+
+
