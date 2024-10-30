@@ -64,7 +64,10 @@ This certificate above verifies that Ronakkumar Lalitbhai Thakkar successfully c
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-
+This certificate above verifies that Ronak Thakkar successfully completed the course [Scrum Master Certification 2024 + Agile Scrum Certification](https://udemy.com/course/scrum-certification/) on 10/29/2024 as taught by Paul Ashun on Udemy. The certificate indicates the entire course was completed as validated by the student. The course duration represents the total video hours of the course at time of most recent completion.
+ 
+ - [Scrum Master Certification 2024 + Agile Scrum ](https://udemy-certificate.s3.amazonaws.com/image/UC-df004a1d-e3e2-4414-8563-f142a2ed0ce0.jpg)
+ - [Scrum Master Certification 2024 + Agile Scrum ](https://udemy-certificate.s3.amazonaws.com/image/UC-df004a1d-e3e2-4414-8563-f142a2ed0ce0.jpg)
 
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
