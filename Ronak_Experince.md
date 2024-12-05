@@ -7,8 +7,10 @@ Feb 2022 - Present • 2 years 8 months
 
 Projects
 Jun 2024 - Dec 2024 • 6 months 9 days
+
 Addweb Solution PVT LTD
 Aug 2020 - Jan 2022 • 1 year 5 months
+
 Associate QA Engineer
 Aug 2020 - Jan 2022 • 1 year 5 months
 
