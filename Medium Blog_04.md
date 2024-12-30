@@ -66,3 +66,29 @@ Quetext
 
 Share your thoughts on the future of software testing! What trends do you think will dominate 2025? #softwaretesting #testingtrends #AI #automation
 
+#SoftwareTesting #TestingTrends #AIinTesting #TestAutomation #DevOps #CareerGrowth #JobSearch #Recruiters #Hiring #TechTrends #ITIndustry #SoftwareDevelopment #DigitalTransformation #Innovation #LinkedInLive #LinkedInLearning #ProfessionalGrowth #Networking #Careers
+#SoftwareTesting
+#TestingTrends
+#QAEngineering
+#QualityAssurance
+#TestAutomation
+#LinkedInLive
+#LinkedInLearning
+#ProfessionalGrowth
+#Networking
+#CareerGrowth
+#JobSearch
+#Recruiters
+#Hiring
+#CareerDevelopment
+#ArtificialIntelligence
+#AIinTesting
+#AutomationTesting
+#DevOps
+#ContinuousTesting
+#Careers
+#TechTrends
+#ITIndustry
+#SoftwareDevelopment
+#DigitalTransformation
+#Innovation
