@@ -21,7 +21,7 @@ This certificate above verifies that Ronakkumar Lalitbhai Thakkar successfully c
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-This certificate above verifies that Ronak Thakkar successfully completed the course **Assertiveness Basics: The 50-minute Communication Guide** on 10/03/2024 as taught by Dr. Roy Naraine, Adam Naraine, Jimmy Naraine • Official Udemy Partner on Udemy. The certificate indicates the entire course was completed as validated by the student. The course duration represents the total video hours of the course at time of most recent completion.
+This certificate above verifies that Ronak Thakkar successfully completed the course **[Assertiveness Basics: The 50-minute Communication Guide](https://tm.udemy.com/course/assertiveness-basics-the-30-minute-communication-guide/learn/lecture/4745616#overview)** on 10/03/2024 as taught by Dr. Roy Naraine, Adam Naraine, Jimmy Naraine • Official Udemy Partner on Udemy. The certificate indicates the entire course was completed as validated by the student. The course duration represents the total video hours of the course at time of most recent completion.
 
 - [The 50-minute Communication Guide.jpg](https://udemy-certificate.s3.amazonaws.com/image/UC-fdfc542b-a8eb-465c-91fb-d9444e33aa4f.jpg)
 - [The 50-minute Communication Guide.pdf](https://udemy-certificate.s3.amazonaws.com/pdf/UC-fdfc542b-a8eb-465c-91fb-d9444e33aa4f.pdf)
