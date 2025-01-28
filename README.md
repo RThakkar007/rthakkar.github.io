@@ -81,11 +81,19 @@ This certificate above verifies that Ronakkumar Lalitbhai Thakkar successfully c
 
 This certificate above verifies that Ronak Thakkar successfully completed the course [Think Like a Leader](https://tm.udemy.com/certificate/UC-a04c4e7f-73ad-49e2-9c52-5b170fc377ac/) with Brian Tracy on 11/15/2024 as taught by Brian Tracy on Udemy. The certificate indicates the entire course was completed as validated by the student. The course duration represents the total video hours of the course at time of most recent completion.
 
-- Think Like a Leader](https://udemy-certificate.s3.amazonaws.com/image/UC-a04c4e7f-73ad-49e2-9c52-5b170fc377ac.jpg/)
+- Think Like a Leader](https://udemy-certificate.s3.amazonaws.com/image/UC-a04c4e7f-73ad-49e2-9c52-5b170fc377ac.jpg)
 - Think Like a Leader](https://udemy-certificate.s3.amazonaws.com/pdf/UC-a04c4e7f-73ad-49e2-9c52-5b170fc377ac.pdf)
 
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+This certificate above verifies that Ronak Thakkar successfully completed the course [Learn Manual Software Testing + Agile with Jira Tool](https://tm.udemy.com/certificate/UC-79db68e7-af11-4ced-8f72-5f6c442d907d/) on 01/28/2025 as taught by Pavan Kumar on Udemy. The certificate indicates the entire course was completed as validated by the student. The course duration represents the total video hours of the course at time of most recent completion.
+
+- [Learn Manual Software Testing + Agile with Jira Tool.jpg](https://udemy-certificate.s3.amazonaws.com/image/UC-79db68e7-af11-4ced-8f72-5f6c442d907d.jpg)
+- [Learn Manual Software Testing + Agile with Jira Tool.pdf](https://udemy-certificate.s3.amazonaws.com/pdf/UC-79db68e7-af11-4ced-8f72-5f6c442d907d.pdf)
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
 
 Medium Blog
 
