@@ -41,6 +41,7 @@ This certificate above verifies that Ronak Thakkar successfully completed the co
 - [ISTQB Advanced Level Agile Technical Tester (ATT) on 10/07/2024 as taught by Maged Koshty, Scottie Crump on Udemy.pdf](https://udemy-certificate.s3.amazonaws.com/pdf/UC-62470d60-a0fe-4f05-abbe-db40211792cc.pdf)
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
 **[JMETER from Scratch on Live Apps -Performance Testing on Udemy](https://tm.udemy.com/certificate/UC-7d13c8bb-24a4-4e9d-bbaf-b81b6fe3cf8d/)**
 
 This certificate above verifies that RonaK Thakkar successfully completed the course Learn [JMETER from Scratch on Live Apps -Performance Testing on Udemy](https://tm.udemy.com/certificate/UC-7d13c8bb-24a4-4e9d-bbaf-b81b6fe3cf8d/) on 10/10/2024 as taught by Rahul Shetty on Udemy. The certificate indicates the entire course was completed as validated by the student. The course duration represents the total video hours of the course at time of most recent completion.
