@@ -66,7 +66,6 @@ This certificate above verifies that Ronak Thakkar successfully completed the co
  - [Scrum Master Certification 2024 + Agile Scrum ](https://udemy-certificate.s3.amazonaws.com/image/UC-df004a1d-e3e2-4414-8563-f142a2ed0ce0.jpg)
 
 
-
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 **8.**
 This certificate above verifies that Ronakkumar Lalitbhai Thakkar successfully completed the course [Understanding ISTQB Foundation Level (CTFL)](https://tm.udemy.com/certificate/UC-0c9cf432-b956-4156-83fe-ddc3486e33a3/) V4.0 - 2024 on 10/05/2024 as taught by Maged Koshty on Udemy. The certificate indicates the entire course was completed as validated by the student. The course duration represents the total video hours of the course at time of most recent completion.
