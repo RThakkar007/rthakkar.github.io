@@ -109,6 +109,12 @@ This certificate above verifies that Ronak Thakkar successfully completed the co
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
+- [Introduction to Generative AI](https://www.cloudskillsboost.google/public_profiles/81eb8c3d-0be6-4c5f-aafa-2aa8ef9dddca/badges/15685339)
+- [Google Cloud Computing Foundations: Cloud Computing Fundamentals](https://www.cloudskillsboost.google/public_profiles/81eb8c3d-0be6-4c5f-aafa-2aa8ef9dddca/badges/15803584)
+
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
 Medium Blog
 
 **Postman - Learn API Testing from Scratch with Live Projects**
