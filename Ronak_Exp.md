@@ -1,3 +1,11 @@
+Ronak Prior Work Experince : 
+
+Company	Start Date	End Date	Designation
+Tech Mahindra Limited (Sr. QA Test Engineer) -> 14-02-2022 to 10/08/2025 = 3 Year 7 Months
+Addweb Solution PVT LTD (Associate QA Engineer) -> 05/08/2020 to 15/01/2022 = 1 Year 5 Months (17 Months)
+Mind inventory (Android Developer) -> 01/01/2019 to 22/11/2019 = 12 Months
+Tech Extensor PVT LTD(Jr. Android Developer) -> 28/12/2017 to 28/12/2018 = 12 Months
+
 Total Industrial Experince : 2.8 + 1.5 + 0.10 + 1 =  6 
 
 **TechMahindra Limited**
