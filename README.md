@@ -115,12 +115,15 @@ This certificate above verifies that Ronak Thakkar successfully completed the co
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
+This certificate above verifies that Ronak Thakkar successfully completed the course Communicate Like a CEO on 06/06/2025 as taught by Alisa Cohn on Udemy. The certificate indicates the entire course was completed as validated by the student. The course duration represents the total video hours of the course at time of most recent completion.
+
+- [Communicate Like a CEO.pdf](https://udemy-certificate.s3.amazonaws.com/pdf/UC-68cfa0ee-4ed0-4377-a51d-7a7612fd1c86.pdf)
+- [Communicate Like a CEO.png](https://udemy-certificate.s3.amazonaws.com/image/UC-68cfa0ee-4ed0-4377-a51d-7a7612fd1c86.jpg)
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
 Medium Blog
 
 **Postman - Learn API Testing from Scratch with Live Projects**
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-
-
-
-
