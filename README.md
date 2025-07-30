@@ -127,3 +127,12 @@ Medium Blog
 **Postman - Learn API Testing from Scratch with Live Projects**
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+This certificate above verifies that Ronakkumar Lalitbhai Thakkar successfully completed the course Learn GenAI Tools & AI Agents for Software Testing on 09/30/2024 as taught by Rahul Shetty Academy on Udemy. The certificate indicates the entire course was completed as validated by the student. The course duration represents the total video hours of the course at time of most recent completion.
+
+- [Learn GenAI Tools & AI Agents for Software Testing.pdf](https://udemy-certificate.s3.amazonaws.com/pdf/UC-0ee0677f-56f9-4a53-a722-9813c93da9d5.pdf)
+- [Learn GenAI Tools & AI Agents for Software Testing.jpg](https://udemy-certificate.s3.amazonaws.com/image/UC-0ee0677f-56f9-4a53-a722-9813c93da9d5.jpg)
+
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
