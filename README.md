@@ -136,7 +136,7 @@ This certificate above verifies that Ronakkumar Lalitbhai Thakkar successfully c
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-This certificate above verifies that Ronakkumar Lalitbhai Thakkar successfully completed the course *Six Sigma: Certified Lean Six Sigma Yellow Belt (Accredited)* on 08/19/2025 as taught by Advanced Innovation Group Pro Excellence (AIGPE) on Udemy. The certificate indicates the entire course was completed as validated by the student. The course duration represents the total video hours of the course at time of most recent completion.
+This certificate above verifies that Ronakkumar Lalitbhai Thakkar successfully completed the course [Six Sigma: Certified Lean Six Sigma Yellow Belt (Accredited)](https://tm.udemy.com/certificate/UC-60ac1875-1d0d-4f35-a883-5262cb61171e/) on 08/19/2025 as taught by Advanced Innovation Group Pro Excellence (AIGPE) on Udemy. The certificate indicates the entire course was completed as validated by the student. The course duration represents the total video hours of the course at time of most recent completion.
 
 - [Six Sigma: Certified Lean Six Sigma Yellow Belt (Accredited).PDF](https://udemy-certificate.s3.amazonaws.com/pdf/UC-60ac1875-1d0d-4f35-a883-5262cb61171e.pdf)
 - [Six Sigma: Certified Lean Six Sigma Yellow Belt (Accredited).jpg](https://udemy-certificate.s3.amazonaws.com/image/UC-60ac1875-1d0d-4f35-a883-5262cb61171e.jpg)
