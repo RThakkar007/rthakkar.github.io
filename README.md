@@ -145,3 +145,11 @@ This certificate above verifies that Ronakkumar Lalitbhai Thakkar successfully c
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
+This certificate above verifies that Ronakkumar Lalitbhai Thakkar successfully completed the course [Playwright: Web Automation Testing From Zero to Hero](https://tm.udemy.com/certificate/UC-a39b0c26-6187-4baa-9025-9f203715b1d7/) on 09/09/2025 as taught by Artem Bondar on Udemy. The certificate indicates the entire course was completed as validated by the student. The course duration represents the total video hours of the course at time of most recent completion.
+
+
+- [Playwright: Web Automation Testing From Zero to Hero.pdf](https://udemy-certificate.s3.amazonaws.com/pdf/UC-a39b0c26-6187-4baa-9025-9f203715b1d7.pdf)
+- [Playwright: Web Automation Testing From Zero to Hero.jpg](https://udemy-certificate.s3.amazonaws.com/image/UC-a39b0c26-6187-4baa-9025-9f203715b1d7.jpg)
+
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
