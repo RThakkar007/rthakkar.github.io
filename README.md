@@ -153,3 +153,12 @@ This certificate above verifies that Ronakkumar Lalitbhai Thakkar successfully c
 
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Introduction to Large Language Models
+This is an introductory level micro-learning course that explores what large language models (LLM) are, the use cases where they can be utilized, and how you can use prompt tuning to enhance LLM performance. It also covers Google tools to help you develop your own Gen AI apps.
+
+<img width="500" height="455" alt="licxd8JDS5_vJ3_cXDcU2Wmyj8Ii8Old17CuG49CW+M=" src="https://github.com/user-attachments/assets/958a1464-55e9-42ab-8260-a34d0b42ca08" />
+
+- https://www.cloudskillsboost.google/public_profiles/81eb8c3d-0be6-4c5f-aafa-2aa8ef9dddca/badges/18349571
+
+
