@@ -169,5 +169,15 @@ Gemini for Google Workspace provides customers with generative AI features in Go
 
 https://www.cloudskillsboost.google/public_profiles/81eb8c3d-0be6-4c5f-aafa-2aa8ef9dddca/badges/18376942
 
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+Introduction to Gemini for Google Workspace
+
+https://www.cloudskillsboost.google/public_profiles/81eb8c3d-0be6-4c5f-aafa-2aa8ef9dddca/badges/18376942
+
+Gemini for Google Workspace provides customers with generative AI features in Google Workspace. In this learning path, you learn about the key features of Gemini and how they can be used to improve productivity and efficiency in Google Workspace.
+
+![HDVM34wXSk9KXGJnGhxEZxv14T6ibZWfIZLkf_3MXo8=](https://github.com/user-attachments/assets/3f7d9bfb-8976-4fe3-b830-31a67bfe529d)
 
 
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
