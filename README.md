@@ -159,4 +159,9 @@ https://www.cloudskillsboost.google/public_profiles/81eb8c3d-0be6-4c5f-aafa-2aa8
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
+DHS Certificate : 
+I’m excited to share that I’ve earned the DHS Trusted Tester™ Certification from the U.S. Department of Homeland Security (Customer Experience Directorate), after successfully completing the Trusted Tester for Web on Windows program. This certification validates my ability to evaluate web accessibility using a repeatable test process aligned with federal accessibility expectations, and to help teams identify and fix issues that impact users with disabilities. Certificate ID: TT-2604-08793 | Issued: Apr 16, 2026. I’m actively looking to connect with recruiters and teams focused on building inclusive, accessible digital experiences and strengthening accessibility quality across products. 
+1
+- [DHS Trusted Tester™ Certification.pdf](https://github.com/user-attachments/files/26970108/TT-2604-08793_16APR2026.1.pdf)
+
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
