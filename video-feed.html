@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Video Feed – Accessible Like Buttons (WCAG 2.4.6)</title>
+  <style>
+    /* ── Reset & Base ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f0f2f5;
+      color: #1c1e21;
+      min-height: 100vh;
+    }
+
+    /* ── Top Nav ──────────────────────────────────────────────── */
+    header {
+      background: #fff;
+      border-bottom: 1px solid #ddd;
+      padding: 0 1rem;
+      display: flex;
+      align-items: center;
+      height: 56px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    header h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1877f2;
+    }
+
+    /* ── Feed Layout ──────────────────────────────────────────── */
+    main {
+      max-width: 680px;
+      margin: 1.5rem auto;
+      padding: 0 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    /* ── Video Card ───────────────────────────────────────────── */
+    .video-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.12);
+      overflow: hidden;
+    }
+
+    /* Post header */
+    .post-header {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      padding: .875rem 1rem .5rem;
+    }
+    .avatar {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: #1877f2;
+      color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: .95rem;
+      flex-shrink: 0;
+    }
+    .post-meta { display: flex; flex-direction: column; }
+    .post-author { font-weight: 600; font-size: .95rem; }
+    .post-time   { font-size: .78rem; color: #65676b; }
+
+    /* Video thumbnail */
+    .video-wrapper {
+      position: relative;
+      background: #000;
+      aspect-ratio: 16 / 9;
+      cursor: pointer;
+      overflow: hidden;
+    }
+    .video-wrapper video {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    /* Fallback placeholder when no video src */
+    .video-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, #1c1e21 0%, #2d3748 100%);
+      color: #fff;
+    }
+    .play-icon {
+      width: 64px; height: 64px;
+      background: rgba(255,255,255,.2);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.75rem;
+    }
+
+    /* Post caption */
+    .post-caption {
+      padding: .625rem 1rem .25rem;
+      font-size: .95rem;
+      line-height: 1.45;
+    }
+    .video-title {
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: .2rem;
+    }
+
+    /* Reaction counts */
+    .reaction-counts {
+      padding: .375rem 1rem;
+      font-size: .82rem;
+      color: #65676b;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #e4e6eb;
+    }
+
+    /* ── Action Bar ───────────────────────────────────────────── */
+    .action-bar {
+      display: flex;
+      padding: .25rem .5rem;
+      border-bottom: 1px solid #e4e6eb;
+    }
+    .action-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .4rem;
+      padding: .55rem .5rem;
+      border: none;
+      background: transparent;
+      border-radius: 8px;
+      font-size: .9rem;
+      font-weight: 600;
+      color: #65676b;
+      cursor: pointer;
+      transition: background .15s;
+    }
+    .action-btn:hover  { background: #f0f2f5; }
+    .action-btn:focus  {
+      outline: 3px solid #1877f2;
+      outline-offset: 2px;
+    }
+    .action-btn.liked  { color: #1877f2; }
+    .action-btn svg    { width: 20px; height: 20px; flex-shrink: 0; }
+
+    /* ── Comments Section ─────────────────────────────────────── */
+    .comments-section { padding: .5rem 1rem 1rem; }
+    .comments-heading {
+      font-size: .85rem;
+      font-weight: 600;
+      color: #65676b;
+      margin-bottom: .625rem;
+    }
+
+    /* Comment input */
+    .comment-form {
+      display: flex;
+      gap: .5rem;
+      margin-bottom: .875rem;
+    }
+    .comment-form .avatar { width: 32px; height: 32px; font-size: .8rem; }
+    .comment-input-wrap { flex: 1; position: relative; }
+    .comment-input {
+      width: 100%;
+      padding: .55rem .875rem;
+      border-radius: 20px;
+      border: 1px solid #ccd0d5;
+      font-size: .9rem;
+      background: #f0f2f5;
+      outline: none;
+      transition: border-color .15s, background .15s;
+    }
+    .comment-input:focus {
+      border-color: #1877f2;
+      background: #fff;
+      box-shadow: 0 0 0 2px rgba(24,119,242,.25);
+    }
+    .send-btn {
+      position: absolute;
+      right: .5rem; top: 50%;
+      transform: translateY(-50%);
+      background: none; border: none;
+      cursor: pointer; color: #1877f2;
+      padding: .25rem;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .send-btn:focus {
+      outline: 3px solid #1877f2;
+      outline-offset: 2px;
+    }
+    .send-btn svg { width: 18px; height: 18px; }
+
+    /* Individual comment */
+    .comment-list { display: flex; flex-direction: column; gap: .625rem; }
+    .comment-item {
+      display: flex;
+      gap: .5rem;
+      align-items: flex-start;
+    }
+    .comment-item .avatar { width: 32px; height: 32px; font-size: .78rem; }
+    .comment-body { flex: 1; }
+    .comment-bubble {
+      background: #f0f2f5;
+      border-radius: 12px;
+      padding: .45rem .75rem;
+      display: inline-block;
+      max-width: 100%;
+    }
+    .comment-author { font-weight: 600; font-size: .85rem; }
+    .comment-text   { font-size: .9rem; margin-top: .1rem; line-height: 1.4; }
+    .comment-actions {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      margin-top: .2rem;
+      padding-left: .25rem;
+    }
+    .comment-time { font-size: .75rem; color: #65676b; }
+
+    /* Comment Like button */
+    .comment-like-btn {
+      background: none;
+      border: none;
+      font-size: .8rem;
+      font-weight: 600;
+      color: #65676b;
+      cursor: pointer;
+      padding: .15rem .3rem;
+      border-radius: 4px;
+      display: flex; align-items: center; gap: .25rem;
+      transition: background .15s;
+    }
+    .comment-like-btn:hover { background: #e4e6eb; }
+    .comment-like-btn:focus {
+      outline: 3px solid #1877f2;
+      outline-offset: 2px;
+    }
+    .comment-like-btn.liked { color: #1877f2; }
+    .comment-like-btn svg { width: 14px; height: 14px; }
+
+    /* Like count badge on comments */
+    .comment-like-count {
+      font-size: .75rem;
+      color: #65676b;
+      display: flex; align-items: center; gap: .15rem;
+    }
+
+    /* ── Skip Link (accessibility) ────────────────────────────── */
+    .skip-link {
+      position: absolute;
+      top: -40px; left: 0;
+      background: #1877f2; color: #fff;
+      padding: .5rem 1rem;
+      border-radius: 0 0 8px 0;
+      font-weight: 600;
+      z-index: 9999;
+      transition: top .2s;
+      text-decoration: none;
+    }
+    .skip-link:focus { top: 0; }
+
+    /* ── Notification toast ───────────────────────────────────── */
+    #toast {
+      position: fixed;
+      bottom: 1.5rem; left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: #1c1e21;
+      color: #fff;
+      padding: .6rem 1.2rem;
+      border-radius: 24px;
+      font-size: .9rem;
+      opacity: 0;
+      transition: transform .3s, opacity .3s;
+      pointer-events: none;
+      z-index: 200;
+    }
+    #toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* ── Live region for screen readers ──────────────────────── */
+    .sr-only {
+      position: absolute;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Skip navigation for keyboard users -->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- Live region: announces state changes to screen readers -->
+  <div id="live-region" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+
+  <!-- Toast notification -->
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <!-- ── Header ──────────────────────────────────────────────── -->
+  <header role="banner">
+    <h1>VideoFeed</h1>
+  </header>
+
+  <!-- ── Main Feed ───────────────────────────────────────────── -->
+  <main id="main-content" role="main" aria-label="Video feed">
+
+    <!-- ══════════════════════════════════════════════════════════
+         VIDEO CARD 1
+         ══════════════════════════════════════════════════════════ -->
+    <article class="video-card" aria-label="Post by Alex Rivera: Introduction to Accessibility Testing">
+
+      <!-- Post header -->
+      <header class="post-header">
+        <div class="avatar" aria-hidden="true">AR</div>
+        <div class="post-meta">
+          <span class="post-author">Alex Rivera</span>
+          <time class="post-time" datetime="2026-05-26T10:30">May 26 at 10:30 AM</time>
+        </div>
+      </header>
+
+      <!-- Video -->
+      <div class="video-wrapper" role="img" aria-label="Video thumbnail: Introduction to Accessibility Testing">
+        <div class="video-placeholder">
+          <div class="play-icon" aria-hidden="true">▶</div>
+        </div>
+      </div>
+
+      <!-- Caption -->
+      <div class="post-caption">
+        <p class="video-title">Introduction to Accessibility Testing</p>
+        <p>A beginner-friendly walkthrough of WCAG 2.1 principles and how to test for them using free tools.</p>
+      </div>
+
+      <!-- Reaction counts -->
+      <div class="reaction-counts" aria-label="Reaction summary">
+        <span id="v1-like-count">👍 142 likes</span>
+        <span>3 comments</span>
+      </div>
+
+      <!-- ── Action bar ──────────────────────────────────────── -->
+      <div class="action-bar" role="group" aria-label="Post actions for Introduction to Accessibility Testing">
+
+        <!--
+          WCAG 2.4.6 FIX — Post Like button
+          ✅ aria-label is descriptive: identifies the action ("Like") AND
+             the specific content it applies to (the video title).
+          ✅ aria-pressed conveys toggle state to assistive technologies.
+        -->
+        <button
+          class="action-btn"
+          id="like-btn-v1"
+          aria-label="Like video: Introduction to Accessibility Testing"
+          aria-pressed="false"
+          onclick="togglePostLike(this, 'v1-like-count', 'Introduction to Accessibility Testing')"
+        >
+          <!-- Thumbs-up SVG icon (decorative, hidden from AT) -->
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/>
+            <path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/>
+          </svg>
+          <span aria-hidden="true">Like</span>
+        </button>
+
+        <!--
+          Comments button — also descriptive per WCAG 2.4.6
+        -->
+        <button
+          class="action-btn"
+          aria-label="Comment on video: Introduction to Accessibility Testing"
+          onclick="toggleComments('comments-v1', this)"
+          aria-expanded="false"
+          aria-controls="comments-v1"
+        >
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+          <span aria-hidden="true">Comment</span>
+        </button>
+
+        <button
+          class="action-btn"
+          aria-label="Share video: Introduction to Accessibility Testing"
+        >
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+          </svg>
+          <span aria-hidden="true">Share</span>
+        </button>
+      </div>
+
+      <!-- ── Comments Section ────────────────────────────────── -->
+      <section class="comments-section" id="comments-v1" aria-label="Comments for Introduction to Accessibility Testing">
+        <h2 class="comments-heading">Comments</h2>
+
+        <!-- Comment input form -->
+        <form
+          class="comment-form"
+          aria-label="Add a comment to Introduction to Accessibility Testing"
+          onsubmit="addComment(event, 'comment-list-v1', 'Introduction to Accessibility Testing')"
+        >
+          <div class="avatar" aria-hidden="true">ME</div>
+          <div class="comment-input-wrap">
+            <label for="comment-input-v1" class="sr-only">
+              Write a comment on Introduction to Accessibility Testing
+            </label>
+            <input
+              type="text"
+              id="comment-input-v1"
+              class="comment-input"
+              placeholder="Write a comment…"
+              autocomplete="off"
+              maxlength="280"
+            />
+            <button
+              type="submit"
+              class="send-btn"
+              aria-label="Send comment on Introduction to Accessibility Testing"
+            >
+              <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+              </svg>
+            </button>
+          </div>
+        </form>
+
+        <!-- Existing comments -->
+        <ul class="comment-list" id="comment-list-v1" aria-label="Comment list for Introduction to Accessibility Testing">
+
+          <li class="comment-item">
+            <div class="avatar" aria-hidden="true">JD</div>
+            <div class="comment-body">
+              <div class="comment-bubble">
+                <span class="comment-author">Jamie Doe</span>
+                <p class="comment-text">This is exactly what I needed — clear and concise. Thank you!</p>
+              </div>
+              <div class="comment-actions">
+                <time class="comment-time" datetime="2026-05-26T11:05">1 hr ago</time>
+
+                <!--
+                  WCAG 2.4.6 FIX — Comment Like button
+                  ✅ aria-label identifies the action ("Like") AND
+                     the specific comment context (author name).
+                  ✅ aria-pressed conveys toggle state.
+                  ✅ Distinguishes this button from the post Like button.
+                -->
+                <button
+                  class="comment-like-btn"
+                  aria-label="Like comment by Jamie Doe: This is exactly what I needed — clear and concise. Thank you!"
+                  aria-pressed="false"
+                  onclick="toggleCommentLike(this, 'v1-c1-count', 'Jamie Doe')"
+                >
+                  <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/>
+                    <path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/>
+                  </svg>
+                  Like
+                </button>
+                <span class="comment-like-count" id="v1-c1-count" aria-label="8 likes on Jamie Doe's comment">
+                  <svg aria-hidden="true" focusable="false" width="12" height="12" viewBox="0 0 24 24" fill="#1877f2">
+                    <circle cx="12" cy="12" r="12"/>
+                    <path fill="#fff" d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/>
+                  </svg>
+                  8
+                </span>
+              </div>
+            </div>
+          </li>
+
+          <li class="comment-item">
+            <div class="avatar" aria-hidden="true">SM</div>
+            <div class="comment-body">
+              <div class="comment-bubble">
+                <span class="comment-author">Sara Mitchell</span>
+                <p class="comment-text">Great video! Would love a follow-up on ARIA roles.</p>
+              </div>
+              <div class="comment-actions">
+                <time class="comment-time" datetime="2026-05-26T12:20">2 hrs ago</time>
+
+                <!--
+                  WCAG 2.4.6 FIX — Comment Like button (second comment)
+                  ✅ Unique aria-label per comment so each button is
+                     individually identifiable by assistive technologies.
+                -->
+                <button
+                  class="comment-like-btn"
+                  aria-label="Like comment by Sara Mitchell: Great video! Would love a follow-up on ARIA roles."
+                  aria-pressed="false"
+                  onclick="toggleCommentLike(this, 'v1-c2-count', 'Sara Mitchell')"
+                >
+                  <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/>
+                    <path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/>
+                  </svg>
+                  Like
+                </button>
+                <span class="comment-like-count" id="v1-c2-count" aria-label="3 likes on Sara Mitchell's comment">
+                  <svg aria-hidden="true" focusable="false" width="12" height="12" viewBox="0 0 24 24" fill="#1877f2">
+                    <circle cx="12" cy="12" r="12"/>
+                    <path fill="#fff" d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/>
+                  </svg>
+                  3
+                </span>
+              </div>
+            </div>
+          </li>
+
+          <li class="comment-item">
+            <div class="avatar" aria-hidden="true">KP</div>
+            <div class="comment-body">
+              <div class="comment-bubble">
+                <span class="comment-author">Kevin Park</span>
+                <p class="comment-text">Bookmarked. Very useful for my upcoming audit project.</p>
+              </div>
+              <div class="comment-actions">
+                <time class="comment-time" datetime="2026-05-26T14:00">3 hrs ago</time>
+                <button
+                  class="comment-like-btn"
+                  aria-label="Like comment by Kevin Park: Bookmarked. Very useful for my upcoming audit project."
+                  aria-pressed="false"
+                  onclick="toggleCommentLike(this, 'v1-c3-count', 'Kevin Park')"
+                >
+                  <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/>
+                    <path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/>
+                  </svg>
+                  Like
+                </button>
+                <span class="comment-like-count" id="v1-c3-count" aria-label="1 like on Kevin Park's comment">
+                  <svg aria-hidden="true" focusable="false" width="12" height="12" viewBox="0 0 24 24" fill="#1877f2">
+                    <circle cx="12" cy="12" r="12"/>
+                    <path fill="#fff" d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/>
+                  </svg>
+                  1
+                </span>
+              </div>
+            </div>
+          </li>
+
+        </ul>
+      </section>
+    </article>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+         VIDEO CARD 2
+         ══════════════════════════════════════════════════════════ -->
+    <article class="video-card" aria-label="Post by Priya Nair: WCAG 2.4.6 Deep Dive">
+
+      <header class="post-header">
+        <div class="avatar" aria-hidden="true" style="background:#e91e63;">PN</div>
+        <div class="post-meta">
+          <span class="post-author">Priya Nair</span>
+          <time class="post-time" datetime="2026-05-27T08:00">Today at 8:00 AM</time>
+        </div>
+      </header>
+
+      <div class="video-wrapper" role="img" aria-label="Video thumbnail: WCAG 2.4.6 Deep Dive">
+        <div class="video-placeholder" style="background: linear-gradient(135deg, #1a237e 0%, #4a148c 100%);">
+          <div class="play-icon" aria-hidden="true">▶</div>
+        </div>
+      </div>
+
+      <div class="post-caption">
+        <p class="video-title">WCAG 2.4.6 Deep Dive</p>
+        <p>Understanding the "Headings and Labels" success criterion — why descriptive labels matter and how to implement them correctly.</p>
+      </div>
+
+      <div class="reaction-counts" aria-label="Reaction summary">
+        <span id="v2-like-count">👍 89 likes</span>
+        <span>2 comments</span>
+      </div>
+
+      <div class="action-bar" role="group" aria-label="Post actions for WCAG 2.4.6 Deep Dive">
+
+        <!--
+          WCAG 2.4.6 FIX — Post Like button for second video
+          ✅ Unique aria-label referencing this specific video title.
+        -->
+        <button
+          class="action-btn"
+          id="like-btn-v2"
+          aria-label="Like video: WCAG 2.4.6 Deep Dive"
+          aria-pressed="false"
+          onclick="togglePostLike(this, 'v2-like-count', 'WCAG 2.4.6 Deep Dive')"
+        >
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/>
+            <path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/>
+          </svg>
+          <span aria-hidden="true">Like</span>
+        </button>
+
+        <button
+          class="action-btn"
+          aria-label="Comment on video: WCAG 2.4.6 Deep Dive"
+          onclick="toggleComments('comments-v2', this)"
+          aria-expanded="false"
+          aria-controls="comments-v2"
+        >
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+          <span aria-hidden="true">Comment</span>
+        </button>
+
+        <button
+          class="action-btn"
+          aria-label="Share video: WCAG 2.4.6 Deep Dive"
+        >
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+          </svg>
+          <span aria-hidden="true">Share</span>
+        </button>
+      </div>
+
+      <section class="comments-section" id="comments-v2" aria-label="Comments for WCAG 2.4.6 Deep Dive">
+        <h2 class="comments-heading">Comments</h2>
+
+        <form
+          class="comment-form"
+          aria-label="Add a comment to WCAG 2.4.6 Deep Dive"
+          onsubmit="addComment(event, 'comment-list-v2', 'WCAG 2.4.6 Deep Dive')"
+        >
+          <div class="avatar" aria-hidden="true">ME</div>
+          <div class="comment-input-wrap">
+            <label for="comment-input-v2" class="sr-only">
+              Write a comment on WCAG 2.4.6 Deep Dive
+            </label>
+            <input
+              type="text"
+              id="comment-input-v2"
+              class="comment-input"
+              placeholder="Write a comment…"
+              autocomplete="off"
+              maxlength="280"
+            />
+            <button
+              type="submit"
+              class="send-btn"
+              aria-label="Send comment on WCAG 2.4.6 Deep Dive"
+            >
+              <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+              </svg>
+            </button>
+          </div>
+        </form>
+
+        <ul class="comment-list" id="comment-list-v2" aria-label="Comment list for WCAG 2.4.6 Deep Dive">
+
+          <li class="comment-item">
+            <div class="avatar" aria-hidden="true" style="background:#00897b;">TW</div>
+            <div class="comment-body">
+              <div class="comment-bubble">
+                <span class="comment-author">Tom Walsh</span>
+                <p class="comment-text">Finally a clear explanation of 2.4.6! Sharing with my whole team.</p>
+              </div>
+              <div class="comment-actions">
+                <time class="comment-time" datetime="2026-05-27T08:45">45 min ago</time>
+                <!--
+                  WCAG 2.4.6 FIX — Comment Like button for second video
+                  ✅ aria-label is unique and fully descriptive.
+                -->
+                <button
+                  class="comment-like-btn"
+                  aria-label="Like comment by Tom Walsh: Finally a clear explanation of 2.4.6! Sharing with my whole team."
+                  aria-pressed="false"
+                  onclick="toggleCommentLike(this, 'v2-c1-count', 'Tom Walsh')"
+                >
+                  <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/>
+                    <path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/>
+                  </svg>
+                  Like
+                </button>
+                <span class="comment-like-count" id="v2-c1-count" aria-label="5 likes on Tom Walsh's comment">
+                  <svg aria-hidden="true" focusable="false" width="12" height="12" viewBox="0 0 24 24" fill="#1877f2">
+                    <circle cx="12" cy="12" r="12"/>
+                    <path fill="#fff" d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/>
+                  </svg>
+                  5
+                </span>
+              </div>
+            </div>
+          </li>
+
+          <li class="comment-item">
+            <div class="avatar" aria-hidden="true" style="background:#f57c00;">LB</div>
+            <div class="comment-body">
+              <div class="comment-bubble">
+                <span class="comment-author">Lena Brown</span>
+                <p class="comment-text">The aria-label examples were super helpful. More videos like this please!</p>
+              </div>
+              <div class="comment-actions">
+                <time class="comment-time" datetime="2026-05-27T09:10">1 hr ago</time>
+                <button
+                  class="comment-like-btn"
+                  aria-label="Like comment by Lena Brown: The aria-label examples were super helpful. More videos like this please!"
+                  aria-pressed="false"
+                  onclick="toggleCommentLike(this, 'v2-c2-count', 'Lena Brown')"
+                >
+                  <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/>
+                    <path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/>
+                  </svg>
+                  Like
+                </button>
+                <span class="comment-like-count" id="v2-c2-count" aria-label="2 likes on Lena Brown's comment">
+                  <svg aria-hidden="true" focusable="false" width="12" height="12" viewBox="0 0 24 24" fill="#1877f2">
+                    <circle cx="12" cy="12" r="12"/>
+                    <path fill="#fff" d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/>
+                  </svg>
+                  2
+                </span>
+              </div>
+            </div>
+          </li>
+
+        </ul>
+      </section>
+    </article>
+
+  </main><!-- /main -->
+
+
+  <!-- ── JavaScript ──────────────────────────────────────────── -->
+  <script>
+    /* ── Utility: announce to screen readers ──────────────────── */
+    function announce(msg) {
+      const region = document.getElementById('live-region');
+      region.textContent = '';
+      // Slight delay ensures the DOM mutation is detected by AT
+      setTimeout(() => { region.textContent = msg; }, 50);
+    }
+
+    /* ── Utility: show toast ──────────────────────────────────── */
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+    /* ── Toggle post Like button ──────────────────────────────── */
+    function togglePostLike(btn, countId, videoTitle) {
+      const isLiked = btn.getAttribute('aria-pressed') === 'true';
+      const countEl = document.getElementById(countId);
+      const match   = countEl.textContent.match(/\d+/);
+      let   count   = match ? parseInt(match[0], 10) : 0;
+
+      if (isLiked) {
+        // Unlike
+        count = Math.max(0, count - 1);
+        btn.setAttribute('aria-pressed', 'false');
+        btn.classList.remove('liked');
+        /*
+         * WCAG 2.4.6: update aria-label to reflect new state
+         * so the label remains descriptive after interaction.
+         */
+        btn.setAttribute('aria-label', `Like video: ${videoTitle}`);
+        countEl.textContent = `👍 ${count} likes`;
+        announce(`You unliked the video "${videoTitle}". ${count} likes.`);
+        showToast('Like removed');
+      } else {
+        // Like
+        count += 1;
+        btn.setAttribute('aria-pressed', 'true');
+        btn.classList.add('liked');
+        btn.setAttribute('aria-label', `Unlike video: ${videoTitle}`);
+        countEl.textContent = `👍 ${count} likes`;
+        announce(`You liked the video "${videoTitle}". ${count} likes.`);
+        showToast('👍 Liked!');
+      }
+    }
+
+    /* ── Toggle comment Like button ───────────────────────────── */
+    function toggleCommentLike(btn, countId, authorName) {
+      const isLiked = btn.getAttribute('aria-pressed') === 'true';
+      const countEl = document.getElementById(countId);
+      let   count   = parseInt(countEl.textContent.trim(), 10) || 0;
+
+      if (isLiked) {
+        count = Math.max(0, count - 1);
+        btn.setAttribute('aria-pressed', 'false');
+        btn.classList.remove('liked');
+        /*
+         * WCAG 2.4.6: restore the original descriptive label
+         * so the button purpose is clear after unliking.
+         */
+        const commentText = btn.getAttribute('aria-label').replace('Unlike comment', 'Like comment');
+        btn.setAttribute('aria-label', commentText);
+        countEl.setAttribute('aria-label', `${count} likes on ${authorName}'s comment`);
+        countEl.querySelector('svg + *') || (countEl.lastChild.textContent = ` ${count}`);
+        // Update visible count text node
+        countEl.childNodes.forEach(n => { if (n.nodeType === 3) n.textContent = ` ${count}`; });
+        announce(`You unliked ${authorName}'s comment. ${count} likes.`);
+      } else {
+        count += 1;
+        btn.setAttribute('aria-pressed', 'true');
+        btn.classList.add('liked');
+        /*
+         * WCAG 2.4.6: update label to "Unlike" so the current
+         * action (remove like) is clearly communicated.
+         */
+        const newLabel = btn.getAttribute('aria-label').replace('Like comment', 'Unlike comment');
+        btn.setAttribute('aria-label', newLabel);
+        countEl.setAttribute('aria-label', `${count} likes on ${authorName}'s comment`);
+        countEl.childNodes.forEach(n => { if (n.nodeType === 3) n.textContent = ` ${count}`; });
+        announce(`You liked ${authorName}'s comment. ${count} likes.`);
+        showToast('👍 Liked!');
+      }
+    }
+
+    /* ── Toggle comments section visibility ───────────────────── */
+    function toggleComments(sectionId, btn) {
+      const section  = document.getElementById(sectionId);
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      section.style.display = expanded ? 'none' : '';
+    }
+
+    /* ── Add new comment dynamically ──────────────────────────── */
+    function addComment(event, listId, videoTitle) {
+      event.preventDefault();
+      const form      = event.target;
+      const input     = form.querySelector('input[type="text"]');
+      const text      = input.value.trim();
+      if (!text) return;
+
+      const list      = document.getElementById(listId);
+      const commentId = `dyn-${Date.now()}`;
+      const now       = new Date();
+      const timeStr   = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+      /*
+       * Build a new comment list item with a fully descriptive
+       * Like button (WCAG 2.4.6 compliant) from the start.
+       */
+      const li = document.createElement('li');
+      li.className = 'comment-item';
+      li.innerHTML = `
+        <div class="avatar" aria-hidden="true" style="background:#43a047;">ME</div>
+        <div class="comment-body">
+          <div class="comment-bubble">
+            <span class="comment-author">You</span>
+            <p class="comment-text">${escapeHtml(text)}</p>
+          </div>
+          <div class="comment-actions">
+            <time class="comment-time" datetime="${now.toISOString()}">${timeStr}</time>
+            <!--
+              WCAG 2.4.6 — Dynamically created comment Like button
+              ✅ aria-label includes author ("You") and comment text
+                 so assistive technologies can identify it uniquely.
+            -->
+            <button
+              class="comment-like-btn"
+              aria-label="Like comment by You: ${escapeAttr(text)}"
+              aria-pressed="false"
+              onclick="toggleCommentLike(this, '${commentId}-count', 'You')"
+            >
+              <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/>
+                <path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/>
+              </svg>
+              Like
+            </button>
+            <span class="comment-like-count" id="${commentId}-count" aria-label="0 likes on your comment">
+              <svg aria-hidden="true" focusable="false" width="12" height="12" viewBox="0 0 24 24" fill="#1877f2">
+                <circle cx="12" cy="12" r="12"/>
+                <path fill="#fff" d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/>
+              </svg>
+              0
+            </span>
+          </div>
+        </div>`;
+
+      list.appendChild(li);
+      input.value = '';
+      input.focus();
+      announce(`Comment posted on "${videoTitle}": ${text}`);
+      showToast('Comment posted!');
+    }
+
+    /* ── Helpers ──────────────────────────────────────────────── */
+    function escapeHtml(str) {
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+    function escapeAttr(str) {
+      return str.replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+    }
+
+    /* ── Initialise: hide comments sections by default ─────────
+       Users open them via the Comment button (aria-expanded).    */
+    document.querySelectorAll('.comments-section').forEach(sec => {
+      sec.style.display = 'none';
+    });
+  </script>
+
+</body>
+</html>
