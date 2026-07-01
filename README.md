@@ -175,3 +175,10 @@ I’m excited to share that I’ve earned the DHS Trusted Tester™ Certificatio
 - [DHS Trusted Tester™ Certification.pdf](https://github.com/user-attachments/files/26970108/TT-2604-08793_16APR2026.1.pdf)
 
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+**16.**
+Learn Generative AI for Software Testing:
+This certificate above verifies that Ronakkumar Lalitbhai Thakkar successfully completed the course Learn Generative AI for Software Testing on 09/25/2025 as taught by undefined on Udemy. The certificate indicates the entire course was completed as validated by the student. The course length represents the total hours of the videos and article lectures of the course at the time of most recent completion.
+
+- [Learn Generative AI for Software Testing.jpg](https://udemy-certificate.s3.amazonaws.com/image/UC-30fb0874-fdb7-45ab-9409-f688663b9de4.jpg)
+- [Learn Generative AI for Software Testing.pdf](https://udemy-certificate.s3.amazonaws.com/pdf/UC-30fb0874-fdb7-45ab-9409-f688663b9de4.pdf)
