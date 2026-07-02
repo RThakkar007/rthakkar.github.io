@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /tech/
+Disallow: /api/
+Sitemap: https://arcticac-rthakkar.manus.space/sitemap.xml
+

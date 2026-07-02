@@ -167,6 +167,27 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
+    // Code splitting for faster initial load
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // Core React runtime — cached aggressively
+          "vendor-react": ["react", "react-dom"],
+          // tRPC + query layer
+          "vendor-trpc": ["@trpc/client", "@trpc/react-query", "@tanstack/react-query"],
+          // UI component library
+          "vendor-ui": ["@radix-ui/react-dialog", "@radix-ui/react-dropdown-menu", "@radix-ui/react-select", "@radix-ui/react-tabs", "@radix-ui/react-tooltip", "lucide-react", "class-variance-authority", "clsx", "tailwind-merge"],
+          // Charts (heavy — only loaded on analytics page)
+          "vendor-charts": ["recharts"],
+          // Maps (heavy — only loaded on map/booking pages)
+          "vendor-maps": ["@googlemaps/js-api-loader"],
+          // Animation
+          "vendor-motion": ["framer-motion"],
+        },
+      },
+    },
+    // Warn if any chunk exceeds 500KB
+    chunkSizeWarningLimit: 500,
   },
   server: {
     host: true,
