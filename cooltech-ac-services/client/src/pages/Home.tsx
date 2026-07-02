@@ -14,11 +14,13 @@ import {
   Thermometer, Settings, Package, Search
 } from "lucide-react";
 
-const CITIES = ["Delhi NCR", "Mumbai", "Bangalore", "Chennai", "Hyderabad", "Pune", "Kolkata", "Ahmedabad"];
+// Phase 1: Serving Patan, Gujarat only. More cities coming soon.
+const CITIES = ["Patan"];
+const COMING_SOON_CITIES = ["Mehsana", "Siddhpur", "Unjha", "Visnagar", "Ahmedabad"];
 
 export default function Home() {
   const [, navigate] = useLocation();
-  const [selectedCity, setSelectedCity] = useState("Delhi NCR");
+  const [selectedCity, setSelectedCity] = useState("Patan");
   const [citySearch, setCitySearch] = useState("");
 
   const { data: services, isLoading: servicesLoading } = trpc.services.list.useQuery();
@@ -32,10 +34,10 @@ export default function Home() {
   const filteredCities = CITIES.filter(c => c.toLowerCase().includes(citySearch.toLowerCase()));
 
   const stats = [
-    { value: "50K+", label: "Happy Customers" },
-    { value: "500+", label: "Expert Technicians" },
+    { value: "2K+", label: "Happy Customers" },
+    { value: "20+", label: "Expert Technicians" },
     { value: "4.8★", label: "Average Rating" },
-    { value: "30 Min", label: "Avg Response Time" },
+    { value: "45 Min", label: "Avg Response Time" },
   ];
 
   const trustBadges = [
@@ -73,26 +75,26 @@ export default function Home() {
         <div className="container relative py-16 md:py-24">
           <div className="max-w-2xl">
             <Badge className="mb-4 bg-white/10 text-white border-white/20 backdrop-blur-sm">
-              <Zap className="w-3 h-3 mr-1" /> #1 Rated AC Service Platform
+              <MapPin className="w-3 h-3 mr-1" /> Now Serving Patan, Gujarat
             </Badge>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
               Expert AC Services,{" "}
               <span className="text-cyan-300">On Demand</span>
             </h1>
             <p className="text-lg text-white/80 mb-8 leading-relaxed">
-              Experienced, hand-picked professionals for AC repair, installation, cleaning & more — at your doorstep. Transparent pricing, no hidden charges.
+              Patan's most trusted AC service experts — at your doorstep. Certified technicians for repair, installation, cleaning & more. Transparent pricing, no hidden charges.
             </p>
             <div className="bg-white rounded-2xl p-4 shadow-2xl max-w-lg">
-              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Where do you need service?</p>
+              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">📍 Service Area</p>
               <div className="flex items-center gap-2 mb-3">
                 <MapPin className="w-4 h-4 text-primary flex-shrink-0" />
-                <input type="text" placeholder="Search your city..." value={citySearch} onChange={(e) => setCitySearch(e.target.value)} className="flex-1 text-foreground text-sm outline-none bg-transparent" />
+                <span className="flex-1 text-foreground text-sm font-medium">Patan, Gujarat, India</span>
+                <Badge className="bg-green-100 text-green-700 border-green-200 text-xs">Active</Badge>
               </div>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {filteredCities.slice(0, 6).map((city) => (
-                  <button key={city} onClick={() => { setSelectedCity(city); setCitySearch(""); }} className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${selectedCity === city ? "gradient-brand text-white shadow-md" : "bg-muted text-muted-foreground hover:bg-secondary"}`}>{city}</button>
-                ))}
+              <div className="flex flex-wrap gap-2 mb-3">
+                <button className="px-3 py-1.5 rounded-full text-xs font-medium gradient-brand text-white shadow-md">Patan</button>
               </div>
+              <p className="text-xs text-muted-foreground mb-3">🚀 Coming soon: Mehsana, Siddhpur, Unjha, Visnagar & more</p>
               <Button className="w-full gradient-brand text-white border-0 btn-scale" onClick={() => navigate("/services")}>
                 Find AC Services in {selectedCity} <ArrowRight className="w-4 h-4 ml-2" />
               </Button>

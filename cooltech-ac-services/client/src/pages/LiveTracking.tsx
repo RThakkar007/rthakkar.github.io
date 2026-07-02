@@ -12,7 +12,8 @@ import {
   ArrowLeft, Snowflake, Zap, Shield
 } from "lucide-react";
 
-const DEFAULT_CENTER = { lat: 28.6139, lng: 77.2090 };
+// Patan, Gujarat, India coordinates
+const DEFAULT_CENTER = { lat: 23.8493, lng: 72.1266 };
 
 // Simulate technician moving towards customer
 function simulateMovement(start: { lat: number; lng: number }, end: { lat: number; lng: number }, progress: number) {
@@ -58,8 +59,8 @@ export default function LiveTracking() {
 
   // Customer location (booking address or default)
   const customerLoc = DEFAULT_CENTER;
-  // Technician start location (slightly offset)
-  const techStart = { lat: 28.5800, lng: 77.1700 };
+  // Technician start location (slightly offset from Patan center)
+  const techStart = { lat: 23.8200, lng: 72.0900 };
 
   const handleMapReady = useCallback((map: google.maps.Map) => {
     mapRef.current = map;

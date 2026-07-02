@@ -76,7 +76,7 @@ export default function TechnicianProfile() {
               <div className="flex flex-wrap gap-4 mt-3 text-white/80 text-sm">
                 <div className="flex items-center gap-1.5"><Briefcase className="w-4 h-4" />{tech.yearsExperience} years experience</div>
                 <div className="flex items-center gap-1.5"><Award className="w-4 h-4" />{tech.completedJobs?.toLocaleString()} jobs done</div>
-                <div className="flex items-center gap-1.5"><MapPin className="w-4 h-4" />Delhi NCR</div>
+                <div className="flex items-center gap-1.5"><MapPin className="w-4 h-4" />Patan, Gujarat</div>
               </div>
             </div>
             <div className="flex flex-col gap-2 sm:items-end">

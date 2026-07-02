@@ -11,8 +11,8 @@ import { MapView } from "@/components/Map";
 import { trpc } from "@/lib/trpc";
 import { MapPin, Navigation, Search, CheckCircle, Clock, Star, Phone, ArrowRight } from "lucide-react";
 
-// Delhi NCR center coordinates
-const DEFAULT_CENTER = { lat: 28.6139, lng: 77.2090 };
+// Patan, Gujarat, India center coordinates
+const DEFAULT_CENTER = { lat: 23.8493, lng: 72.1266 };
 
 export default function TechnicianLocator() {
   const mapRef = useRef<google.maps.Map | null>(null);
@@ -192,7 +192,7 @@ export default function TechnicianLocator() {
                               <StarRating rating={parseFloat(tech.rating ?? "4.8")} reviewCount={tech.reviewCount ?? 0} size="sm" />
                               <div className="flex items-center gap-1 mt-1 text-xs text-muted-foreground">
                                 <MapPin className="w-3 h-3" />
-                                <span>Delhi NCR</span>
+                                <span>Patan, Gujarat</span>
                                 <span>·</span>
                                 <Clock className="w-3 h-3" />
                                 <span>~{Math.floor(Math.random() * 20) + 5} min</span>

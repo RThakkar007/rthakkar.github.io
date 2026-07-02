@@ -51,7 +51,7 @@ export default function Booking() {
   const [selectedServiceId, setSelectedServiceId] = useState<number | null>(serviceId ? parseInt(serviceId) : null);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
-  const [address, setAddress] = useState({ street: "", city: "Delhi NCR", pincode: "", notes: "" });
+  const [address, setAddress] = useState({ street: "", city: "Patan, Gujarat", pincode: "", notes: "" });
   const [customerInfo, setCustomerInfo] = useState({ name: user?.name ?? "", phone: "" });
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
   const [bookingId, setBookingId] = useState<number | null>(null);

@@ -18,8 +18,12 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-sm text-slate-400 leading-relaxed mb-4">
-              Expert AC services at your doorstep. Transparent pricing, trained professionals, and 100% quality guaranteed.
+              Patan's most trusted AC service platform. Transparent pricing, trained professionals, and 100% quality guaranteed.
             </p>
+            <div className="inline-flex items-center gap-1.5 bg-green-900/40 border border-green-700/40 rounded-full px-3 py-1 mb-4">
+              <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+              <span className="text-xs text-green-400 font-medium">Now Live in Patan, Gujarat</span>
+            </div>
             <div className="flex gap-3">
               <a href="#" className="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center hover:bg-primary transition-colors">
                 <Facebook className="w-4 h-4" />
@@ -45,15 +49,16 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Company */}
+          {/* Service Areas */}
           <div>
-            <h3 className="font-semibold text-white mb-4">Company</h3>
+            <h3 className="font-semibold text-white mb-4">Service Areas</h3>
             <ul className="space-y-2 text-sm">
-              <li><Link href="/technicians" className="hover:text-white transition-colors">Find Technician</Link></li>
-              <li><Link href="/bookings" className="hover:text-white transition-colors">My Bookings</Link></li>
-              <li><Link href="/account" className="hover:text-white transition-colors">My Account</Link></li>
-              <li><a href="#" className="hover:text-white transition-colors">About Us</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-green-400"></span><span className="text-white">Patan <span className="text-green-400 text-xs">(Active)</span></span></li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-slate-500"></span><span>Mehsana <span className="text-slate-500 text-xs">(Coming Soon)</span></span></li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-slate-500"></span><span>Siddhpur <span className="text-slate-500 text-xs">(Coming Soon)</span></span></li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-slate-500"></span><span>Unjha <span className="text-slate-500 text-xs">(Coming Soon)</span></span></li>
+              <li className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-slate-500"></span><span>Visnagar <span className="text-slate-500 text-xs">(Coming Soon)</span></span></li>
+              <li><Link href="/account" className="hover:text-white transition-colors text-xs mt-1 block">My Account</Link></li>
             </ul>
           </div>
 
@@ -71,7 +76,7 @@ export default function Footer() {
               </li>
               <li className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
-                <span>Serving Delhi NCR, Mumbai, Bangalore, Chennai & 50+ cities</span>
+                <span>Patan, Gujarat 384265, India</span>
               </li>
             </ul>
           </div>
