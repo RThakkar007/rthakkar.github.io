@@ -179,8 +179,6 @@ export default defineConfig({
           "vendor-ui": ["@radix-ui/react-dialog", "@radix-ui/react-dropdown-menu", "@radix-ui/react-select", "@radix-ui/react-tabs", "@radix-ui/react-tooltip", "lucide-react", "class-variance-authority", "clsx", "tailwind-merge"],
           // Charts (heavy — only loaded on analytics page)
           "vendor-charts": ["recharts"],
-          // Maps (heavy — only loaded on map/booking pages)
-          "vendor-maps": ["@googlemaps/js-api-loader"],
           // Animation
           "vendor-motion": ["framer-motion"],
         },

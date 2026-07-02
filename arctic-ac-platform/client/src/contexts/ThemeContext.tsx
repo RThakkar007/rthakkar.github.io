@@ -60,5 +60,8 @@ export function useTheme() {
   if (!context) {
     throw new Error("useTheme must be used within ThemeProvider");
   }
-  return context;
+  return {
+    ...context,
+    toggleTheme: context.toggleTheme ?? (() => {}),
+  };
 }

@@ -9,6 +9,7 @@ import {
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // ── Data ─────────────────────────────────────────────────────────────────────
 const SERVICES = [
@@ -73,6 +74,7 @@ function FAQItem({ q, a }: { q: string; a: string }) {
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 export default function Home() {
+  const { t } = useLanguage();
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Navbar />
@@ -87,12 +89,12 @@ export default function Home() {
         <div className="container relative">
           <div className="max-w-3xl">
             <Badge className="mb-5 bg-primary/10 text-primary border-primary/20 px-3 py-1 text-xs font-medium">
-              <Snowflake className="h-3 w-3 mr-1.5" /> On-Demand AC Services
+              <Snowflake className="h-3 w-3 mr-1.5" /> {t.hero_badge}
             </Badge>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight mb-5">
-              Your AC Fixed,{" "}
+              {t.hero_title_1}{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-400">
-                Fast & Reliable
+                {t.hero_title_2}
               </span>
             </h1>
             <p className="text-lg sm:text-xl text-muted-foreground mb-8 max-w-xl leading-relaxed">
@@ -102,12 +104,12 @@ export default function Home() {
             <div className="flex flex-wrap gap-3 mb-10">
               <Link href="/book">
                 <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 h-12 text-base font-semibold shadow-lg shadow-primary/25">
-                  Book a Service <ArrowRight className="ml-2 h-4 w-4" />
+                  {t.hero_book_cta} <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
               <Link href="/track">
                 <Button size="lg" variant="outline" className="h-12 px-8 text-base border-border hover:bg-card">
-                  Track Booking
+                  {t.hero_track_cta}
                 </Button>
               </Link>
             </div>
@@ -128,9 +130,9 @@ export default function Home() {
       <section className="py-16 sm:py-20 bg-card/30">
         <div className="container">
           <div className="text-center mb-10">
-            <h2 className="text-2xl sm:text-3xl font-bold mb-3">Our Services</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold mb-3">{t.services_title}</h2>
             <p className="text-muted-foreground max-w-md mx-auto text-sm sm:text-base">
-              Transparent pricing, no hidden charges. All services include a 30-day workmanship warranty.
+              {t.services_subtitle}
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
@@ -151,7 +153,7 @@ export default function Home() {
                 <p className="text-xs text-muted-foreground mb-4">{desc}</p>
                 <Link href="/book">
                   <Button size="sm" variant="outline" className="w-full text-xs border-border hover:border-primary hover:text-primary">
-                    Book Now
+                    {t.services_book_now}
                   </Button>
                 </Link>
               </div>
@@ -160,7 +162,7 @@ export default function Home() {
           <div className="text-center mt-8">
             <Link href="/services">
               <Button variant="outline" className="border-border hover:border-primary hover:text-primary">
-                View All Services <ArrowRight className="ml-2 h-4 w-4" />
+                {t.services_view_all} <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
           </div>
@@ -171,8 +173,8 @@ export default function Home() {
       <section className="py-16 sm:py-20">
         <div className="container">
           <div className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl font-bold mb-3">How It Works</h2>
-            <p className="text-muted-foreground text-sm sm:text-base">From booking to job done in 4 simple steps</p>
+            <h2 className="text-2xl sm:text-3xl font-bold mb-3">{t.how_title}</h2>
+            <p className="text-muted-foreground text-sm sm:text-base">{t.how_subtitle}</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {HOW_IT_WORKS.map(({ icon: Icon, step, title, desc }, idx) => (
@@ -197,7 +199,7 @@ export default function Home() {
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             <div>
-              <h2 className="text-2xl sm:text-3xl font-bold mb-4">Why Customers Trust ArcticAC</h2>
+              <h2 className="text-2xl sm:text-3xl font-bold mb-4">{t.trust_title}</h2>
               <p className="text-muted-foreground mb-8 text-sm sm:text-base">
                 We combine technology with trained professionals to deliver the fastest, most reliable AC service experience.
               </p>
@@ -242,8 +244,8 @@ export default function Home() {
       <section className="py-16 sm:py-20">
         <div className="container">
           <div className="text-center mb-10">
-            <h2 className="text-2xl sm:text-3xl font-bold mb-3">What Our Customers Say</h2>
-            <p className="text-muted-foreground text-sm sm:text-base">Real reviews from real customers</p>
+            <h2 className="text-2xl sm:text-3xl font-bold mb-3">{t.testimonials_title}</h2>
+            <p className="text-muted-foreground text-sm sm:text-base">{t.testimonials_subtitle}</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {TESTIMONIALS.map(({ name, city, rating, text }) => (
@@ -273,8 +275,8 @@ export default function Home() {
       <section className="py-16 sm:py-20 bg-card/30">
         <div className="container max-w-3xl">
           <div className="text-center mb-10">
-            <h2 className="text-2xl sm:text-3xl font-bold mb-3">Frequently Asked Questions</h2>
-            <p className="text-muted-foreground text-sm sm:text-base">Everything you need to know before booking</p>
+            <h2 className="text-2xl sm:text-3xl font-bold mb-3">{t.faq_title}</h2>
+            <p className="text-muted-foreground text-sm sm:text-base">{t.faq_subtitle}</p>
           </div>
           <div className="space-y-3">
             {FAQS.map((faq) => <FAQItem key={faq.q} {...faq} />)}
@@ -291,9 +293,9 @@ export default function Home() {
             </div>
             <div className="relative">
               <Snowflake className="h-10 w-10 text-primary mx-auto mb-4" />
-              <h2 className="text-2xl sm:text-3xl font-bold mb-3">Ready to Fix Your AC?</h2>
+              <h2 className="text-2xl sm:text-3xl font-bold mb-3">{t.cta_title}</h2>
               <p className="text-muted-foreground mb-8 max-w-md mx-auto text-sm sm:text-base">
-                Book now and get a verified technician at your door — same day, every day.
+                {t.cta_subtitle}
               </p>
               <div className="flex flex-wrap justify-center gap-3">
                 <Link href="/book">

@@ -1,40 +1,17 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { MapPin, Navigation, Loader2, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
-const API_KEY = import.meta.env.VITE_FRONTEND_FORGE_API_KEY;
-const FORGE_BASE_URL =
-  import.meta.env.VITE_FRONTEND_FORGE_API_URL || "https://forge.butterfly-effect.dev";
-const MAPS_PROXY_URL = `${FORGE_BASE_URL}/v1/maps/proxy`;
+// MapMyIndia (Mappls) Autosuggest API — free, India-focused
+// Requires VITE_MAPPLS_API_KEY in env. Falls back to plain input if not set.
+const MAPPLS_KEY = import.meta.env.VITE_MAPPLS_API_KEY as string | undefined;
+const AUTOSUGGEST_URL = "https://search.mappls.com/search/places/autosuggest/json";
 
-let scriptLoaded = false;
-let scriptLoading = false;
-let scriptFailed = false;
-const callbacks: Array<() => void> = [];
-
-function loadMapsScript(cb: () => void) {
-  if (scriptLoaded) { cb(); return; }
-  if (scriptFailed) { cb(); return; }
-  callbacks.push(cb);
-  if (scriptLoading) return;
-  scriptLoading = true;
-  const script = document.createElement("script");
-  script.src = `${MAPS_PROXY_URL}/maps/api/js?key=${API_KEY}&v=weekly&libraries=places,geocoding&loading=async`;
-  script.async = true;
-  script.crossOrigin = "anonymous";
-  script.onload = () => {
-    scriptLoaded = true;
-    callbacks.forEach(fn => fn());
-    callbacks.length = 0;
-  };
-  script.onerror = () => {
-    scriptFailed = true;
-    scriptLoading = false;
-    callbacks.forEach(fn => fn());
-    callbacks.length = 0;
-  };
-  document.head.appendChild(script);
+interface Suggestion {
+  placeName: string;
+  placeAddress: string;
+  eLoc: string;
 }
 
 interface Props {
@@ -44,15 +21,14 @@ interface Props {
 }
 
 export default function AddressAutocomplete({ value, onChange, error }: Props) {
-  const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const [locating, setLocating] = useState(false);
-  const [ready, setReady] = useState(false);
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [inputValue, setInputValue] = useState(value);
-
-  useEffect(() => {
-    loadMapsScript(() => setReady(true));
-  }, []);
+  const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [locating, setLocating] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
 
   // Sync external value changes (e.g. GPS fill)
   useEffect(() => {
@@ -60,49 +36,88 @@ export default function AddressAutocomplete({ value, onChange, error }: Props) {
     if (inputRef.current) inputRef.current.value = value;
   }, [value]);
 
+  // Try to get rough user location for better suggestions (non-blocking)
   useEffect(() => {
-    if (!ready || !containerRef.current) return;
-    // Guard: if Maps failed to load or places API is unavailable, stay on plain input
-    if (!window.google || !window.google.maps || !window.google.maps.places) return;
-
-    // Try new PlaceAutocompleteElement first, fall back to legacy Autocomplete
-    try {
-      // @ts-ignore — new API
-      const pac = new google.maps.places.PlaceAutocompleteElement({
-        componentRestrictions: { country: "in" },
-      });
-      pac.style.width = "100%";
-      pac.style.fontSize = "14px";
-
-      // @ts-ignore
-      pac.addEventListener("gmp-placeselect", async (e: any) => {
-        const place = e.placePrediction.toPlace();
-        await place.fetchFields({ fields: ["displayName", "formattedAddress"] });
-        const addr = place.formattedAddress || place.displayName || "";
-        if (addr) { onChange(addr); setInputValue(addr); }
-      });
-
-      // Replace the input with the new element
-      if (containerRef.current) {
-        containerRef.current.innerHTML = "";
-        containerRef.current.appendChild(pac);
-      }
-    } catch {
-      // Fallback: legacy Autocomplete widget bound to a plain input
-      if (!inputRef.current) return;
-      if (!window.google?.maps?.places?.Autocomplete) return;
-      const ac = new google.maps.places.Autocomplete(inputRef.current, {
-        types: ["geocode", "establishment"],
-        componentRestrictions: { country: "in" },
-        fields: ["formatted_address", "name"],
-      });
-      ac.addListener("place_changed", () => {
-        const place = ac.getPlace();
-        const addr = place.formatted_address || place.name || "";
-        if (addr) { onChange(addr); setInputValue(addr); }
-      });
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => setUserLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
+        () => {}, // silent fail
+        { timeout: 5000, maximumAge: 300000 }
+      );
     }
-  }, [ready]);
+  }, []);
+
+  const fetchSuggestions = useCallback(async (query: string) => {
+    if (!MAPPLS_KEY || query.length < 3) {
+      setSuggestions([]);
+      setShowDropdown(false);
+      return;
+    }
+    setLoading(true);
+    try {
+      const params = new URLSearchParams({
+        query,
+        access_token: MAPPLS_KEY,
+        region: "IND",
+        ...(userLocation ? { location: `${userLocation.lat},${userLocation.lng}` } : {}),
+      });
+      const res = await fetch(`${AUTOSUGGEST_URL}?${params}`);
+      if (!res.ok) throw new Error("API error");
+      const data = await res.json();
+      const results: Suggestion[] = (data.suggestedLocations ?? []).slice(0, 6).map((s: any) => ({
+        placeName: s.placeName ?? "",
+        placeAddress: s.placeAddress ?? "",
+        eLoc: s.eLoc ?? "",
+      }));
+      setSuggestions(results);
+      setShowDropdown(results.length > 0);
+    } catch {
+      setSuggestions([]);
+      setShowDropdown(false);
+    } finally {
+      setLoading(false);
+    }
+  }, [userLocation, MAPPLS_KEY]);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value;
+    setInputValue(val);
+    onChange(val);
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => fetchSuggestions(val), 350);
+  };
+
+  const handleSelect = (s: Suggestion) => {
+    const full = s.placeAddress ? `${s.placeName}, ${s.placeAddress}` : s.placeName;
+    setInputValue(full);
+    onChange(full);
+    setSuggestions([]);
+    setShowDropdown(false);
+    if (inputRef.current) inputRef.current.blur();
+  };
+
+  const handleClear = () => {
+    setInputValue("");
+    onChange("");
+    setSuggestions([]);
+    setShowDropdown(false);
+    if (inputRef.current) { inputRef.current.value = ""; inputRef.current.focus(); }
+  };
+
+  // Reverse geocode using Mappls REST API
+  const reverseGeocode = async (lat: number, lng: number): Promise<string | null> => {
+    if (!MAPPLS_KEY) return null;
+    try {
+      const res = await fetch(
+        `https://atlas.mappls.com/api/places/geocode?access_token=${MAPPLS_KEY}&lat=${lat}&lng=${lng}`
+      );
+      if (!res.ok) return null;
+      const data = await res.json();
+      return data?.results?.[0]?.formatted_address ?? null;
+    } catch {
+      return null;
+    }
+  };
 
   const handleCurrentLocation = () => {
     if (!navigator.geolocation) {
@@ -111,25 +126,24 @@ export default function AddressAutocomplete({ value, onChange, error }: Props) {
     }
     setLocating(true);
     navigator.geolocation.getCurrentPosition(
-      (pos) => {
+      async (pos) => {
         const { latitude, longitude } = pos.coords;
-        if (!window.google) { setLocating(false); return; }
-        const geocoder = new google.maps.Geocoder();
-        geocoder.geocode(
-          { location: { lat: latitude, lng: longitude } },
-          (results, status) => {
-            setLocating(false);
-            if (status === "OK" && results && results[0]) {
-              const addr = results[0].formatted_address;
-              onChange(addr);
-              setInputValue(addr);
-              if (inputRef.current) inputRef.current.value = addr;
-              toast.success("Location detected!");
-            } else {
-              toast.error("Could not determine your address. Please type it manually.");
-            }
-          }
-        );
+        setUserLocation({ lat: latitude, lng: longitude });
+        // Try Mappls reverse geocode first
+        const addr = await reverseGeocode(latitude, longitude);
+        if (addr) {
+          setInputValue(addr);
+          onChange(addr);
+          if (inputRef.current) inputRef.current.value = addr;
+          toast.success("Location detected!");
+        } else {
+          // Fallback: use coordinates as address hint
+          const fallback = `Near ${latitude.toFixed(4)}, ${longitude.toFixed(4)}`;
+          setInputValue(fallback);
+          onChange(fallback);
+          toast.info("Location detected. Please refine your address if needed.");
+        }
+        setLocating(false);
       },
       (err) => {
         setLocating(false);
@@ -145,41 +159,73 @@ export default function AddressAutocomplete({ value, onChange, error }: Props) {
 
   return (
     <div className="space-y-3">
-      {/* Address input — shows PlaceAutocompleteElement or fallback input */}
-      <div
-        ref={containerRef}
-        className={`relative rounded-md border bg-background transition-colors ${
-          error ? "border-red-500" : "border-input hover:border-primary/40"
-        }`}
-      >
-        {/* Fallback plain input (shown until Maps loads or if new API unavailable) */}
-        <div className="relative">
+      {/* Address input with autocomplete dropdown */}
+      <div className="relative">
+        <div
+          className={`relative rounded-md border bg-background transition-colors ${
+            error ? "border-red-500" : "border-input hover:border-primary/40"
+          }`}
+        >
           <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none z-10" />
           <input
             ref={inputRef}
             type="text"
             value={inputValue}
-            onChange={e => { setInputValue(e.target.value); onChange(e.target.value); }}
-            placeholder="Start typing your address..."
-            className="w-full pl-9 pr-9 py-3 bg-transparent text-foreground text-sm focus:outline-none rounded-md min-h-[44px]"
+            onChange={handleInputChange}
+            onFocus={() => suggestions.length > 0 && setShowDropdown(true)}
+            onBlur={() => setTimeout(() => setShowDropdown(false), 200)}
+            placeholder={MAPPLS_KEY ? "Start typing your address..." : "Enter your full address..."}
+            autoComplete="off"
+            className="w-full pl-9 pr-10 py-3 bg-transparent text-foreground text-sm focus:outline-none rounded-md min-h-[44px]"
           />
-          {inputValue && (
-            <button
-              type="button"
-              onClick={() => { onChange(""); setInputValue(""); if (inputRef.current) inputRef.current.value = ""; }}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground p-1 min-w-[44px] min-h-[44px] flex items-center justify-center"
-            >
-              <X className="w-4 h-4" />
-            </button>
-          )}
+          <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1">
+            {loading && <Loader2 className="w-4 h-4 animate-spin text-muted-foreground" />}
+            {inputValue && !loading && (
+              <button
+                type="button"
+                onClick={handleClear}
+                className="text-muted-foreground hover:text-foreground p-1 min-w-[32px] min-h-[32px] flex items-center justify-center rounded"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            )}
+          </div>
         </div>
+
+        {/* Suggestions dropdown */}
+        {showDropdown && suggestions.length > 0 && (
+          <div className="absolute top-full left-0 right-0 mt-1 z-50 rounded-xl border border-white/10
+            bg-[#0d1117] shadow-2xl shadow-black/40 overflow-hidden max-h-72 overflow-y-auto">
+            {suggestions.map((s, i) => (
+              <button
+                key={s.eLoc || i}
+                type="button"
+                onMouseDown={() => handleSelect(s)}
+                className="w-full flex items-start gap-3 px-4 py-3 text-left hover:bg-white/5
+                  transition-colors border-b border-white/5 last:border-0"
+              >
+                <MapPin className="w-4 h-4 text-cyan-400 mt-0.5 shrink-0" />
+                <div className="min-w-0">
+                  <p className="text-sm font-medium text-white truncate">{s.placeName}</p>
+                  {s.placeAddress && (
+                    <p className="text-xs text-slate-400 truncate mt-0.5">{s.placeAddress}</p>
+                  )}
+                </div>
+              </button>
+            ))}
+            <div className="px-4 py-2 text-xs text-slate-600 text-right">
+              Powered by MapMyIndia
+            </div>
+          </div>
+        )}
       </div>
 
       {/* GPS button */}
       <Button
         type="button"
         variant="outline"
-        className="w-full gap-2 border-dashed border-primary/40 hover:border-primary hover:bg-primary/5 text-muted-foreground hover:text-primary transition-all min-h-[44px]"
+        className="w-full gap-2 border-dashed border-primary/40 hover:border-primary hover:bg-primary/5
+          text-muted-foreground hover:text-primary transition-all min-h-[44px]"
         onClick={handleCurrentLocation}
         disabled={locating}
       >
@@ -192,6 +238,12 @@ export default function AddressAutocomplete({ value, onChange, error }: Props) {
 
       {error && (
         <p className="text-xs text-red-400">Please enter a complete address (at least 5 characters).</p>
+      )}
+
+      {!MAPPLS_KEY && (
+        <p className="text-xs text-slate-500">
+          💡 Add <code className="text-cyan-400">VITE_MAPPLS_API_KEY</code> in Settings → Secrets to enable address suggestions.
+        </p>
       )}
     </div>
   );
