@@ -19,6 +19,7 @@ import Privacy from "./pages/Privacy";
 import Cancellation from "./pages/Cancellation";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import ForgotPassword from "./pages/ForgotPassword";
 
 // Admin pages
 import AdminDashboard from "./pages/admin/AdminDashboard";
@@ -53,6 +54,7 @@ function Router() {
       <Route path="/cancellation" component={Cancellation} />
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
+      <Route path="/forgot-password" component={ForgotPassword} />
 
       {/* Admin */}
       <Route path="/admin" component={AdminDashboard} />

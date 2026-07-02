@@ -47,6 +47,17 @@ export default function TechJobDetail() {
   const handlePhotoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
+    // Client-side validation: type and size
+    const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/heic", "application/pdf"] as const;
+    type AllowedMime = typeof ALLOWED_TYPES[number];
+    if (!ALLOWED_TYPES.includes(file.type as AllowedMime)) {
+      toast.error("Only JPEG, PNG, WebP, HEIC, or PDF files are allowed.");
+      return;
+    }
+    if (file.size > 7 * 1024 * 1024) {
+      toast.error("File must be under 7MB.");
+      return;
+    }
     setUploading(true);
     const reader = new FileReader();
     reader.onload = () => {
@@ -56,7 +67,7 @@ export default function TechJobDetail() {
         technicianId: techId,
         fileData: base64,
         fileName: file.name,
-        mimeType: file.type,
+        mimeType: file.type as AllowedMime,
       });
     };
     reader.readAsDataURL(file);
@@ -155,7 +166,7 @@ export default function TechJobDetail() {
 
               {job.status === "in_progress" && (
                 <>
-                  <input ref={fileRef} type="file" accept="image/*" capture="environment" className="hidden" onChange={handlePhotoUpload} />
+                  <input ref={fileRef} type="file" accept="image/jpeg,image/png,image/webp,image/heic,application/pdf" capture="environment" className="hidden" onChange={handlePhotoUpload} />
                   <Button variant="outline" className="w-full h-12" disabled={uploading} onClick={() => fileRef.current?.click()}>
                     <Camera className="w-4 h-4 mr-2" />
                     {uploading ? "Uploading..." : "Upload Photo Proof"}

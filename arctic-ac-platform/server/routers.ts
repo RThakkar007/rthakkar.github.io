@@ -68,6 +68,19 @@ const adminProcedure = protectedProcedure.use(({ ctx, next }) => {
   return next({ ctx });
 });
 
+// ─── Technician JWT guard middleware ─────────────────────────────────────────
+const technicianProcedure = publicProcedure.use(async ({ ctx, next }) => {
+  const token = ctx.req.cookies?.tech_session;
+  if (!token) throw new TRPCError({ code: "UNAUTHORIZED", message: "Technician authentication required" });
+  let techPayload: { technicianId: number };
+  try {
+    techPayload = await verifyTechJwt(token) as { technicianId: number };
+  } catch {
+    throw new TRPCError({ code: "UNAUTHORIZED", message: "Invalid or expired session" });
+  }
+  return next({ ctx: { ...ctx, technicianId: techPayload.technicianId } });
+});
+
 // ─── Services Router ─────────────────────────────────────────────────────────
 const servicesRouter = router({
   list: publicProcedure.query(() => getAllServices()),
@@ -395,15 +408,21 @@ const bookingsRouter = router({
 
 // ─── Technician Jobs Router ───────────────────────────────────────────────────
 const techJobsRouter = router({
-  myJobs: publicProcedure
+  myJobs: technicianProcedure
     .input(z.object({ technicianId: z.number() }))
-    .query(({ input }) => getBookingsByTechnician(input.technicianId)),
+    .query(({ input, ctx }) => {
+      if (ctx.technicianId !== input.technicianId) throw new TRPCError({ code: "FORBIDDEN" });
+      return getBookingsByTechnician(input.technicianId);
+    }),
 
-  activeJob: publicProcedure
+  activeJob: technicianProcedure
     .input(z.object({ technicianId: z.number() }))
-    .query(({ input }) => getActiveJobForTechnician(input.technicianId)),
+    .query(({ input, ctx }) => {
+      if (ctx.technicianId !== input.technicianId) throw new TRPCError({ code: "FORBIDDEN" });
+      return getActiveJobForTechnician(input.technicianId);
+    }),
 
-  acceptJob: publicProcedure
+  acceptJob: technicianProcedure
     .input(z.object({ bookingId: z.number(), technicianId: z.number() }))
     .mutation(async ({ input }) => {
       const booking = await getBookingById(input.bookingId);
@@ -422,17 +441,19 @@ const techJobsRouter = router({
       return { success: true };
     }),
 
-  rejectJob: publicProcedure
+  rejectJob: technicianProcedure
     .input(z.object({ bookingId: z.number(), technicianId: z.number() }))
-    .mutation(async ({ input }) => {
+    .mutation(async ({ input, ctx }) => {
+      if (ctx.technicianId !== input.technicianId) throw new TRPCError({ code: "FORBIDDEN" });
       await updateBookingStatus(input.bookingId, "pending", { technicianId: undefined });
       await updateTechnician(input.technicianId, { isAvailable: true });
       return { success: true };
     }),
 
-  respondToJob: publicProcedure
+  respondToJob: technicianProcedure
     .input(z.object({ bookingId: z.number(), technicianId: z.number(), accept: z.boolean() }))
-    .mutation(async ({ input }) => {
+    .mutation(async ({ input, ctx }) => {
+      if (ctx.technicianId !== input.technicianId) throw new TRPCError({ code: "FORBIDDEN" });
       if (input.accept) {
         await addJobUpdate({ bookingId: input.bookingId, status: "assigned", note: "Technician accepted", updatedBy: "technician" });
         const booking = await getBookingById(input.bookingId);
@@ -453,13 +474,14 @@ const techJobsRouter = router({
       return { success: true };
     }),
 
-  updateJobStatus: publicProcedure
+  updateJobStatus: technicianProcedure
     .input(z.object({
       bookingId: z.number(),
       technicianId: z.number(),
       status: z.enum(["on_the_way", "in_progress", "completed"]),
     }))
-    .mutation(async ({ input }) => {
+    .mutation(async ({ input, ctx }) => {
+      if (ctx.technicianId !== input.technicianId) throw new TRPCError({ code: "FORBIDDEN" });
       await updateBookingStatus(input.bookingId, input.status);
       await addJobUpdate({ bookingId: input.bookingId, status: input.status, updatedBy: "technician" });
       const booking = await getBookingById(input.bookingId);
@@ -489,19 +511,22 @@ const techJobsRouter = router({
       return { success: true };
     }),
 
-  uploadProof: publicProcedure
+  uploadProof: technicianProcedure
     .input(
       z.object({
         bookingId: z.number(),
         technicianId: z.number(),
-        fileData: z.string(),
-        fileName: z.string(),
-        mimeType: z.string(),
+        fileData: z.string().max(10_000_000, "File too large"),
+        fileName: z.string().max(255).regex(/^[\w\-. ]+$/, "Invalid file name"),
+        mimeType: z.enum(["image/jpeg", "image/png", "image/webp", "image/heic", "application/pdf"]),
       })
     )
-    .mutation(async ({ input }) => {
+    .mutation(async ({ input, ctx }) => {
+      if (ctx.technicianId !== input.technicianId) throw new TRPCError({ code: "FORBIDDEN" });
       const buffer = Buffer.from(input.fileData, "base64");
-      const key = `proof/${input.bookingId}/${Date.now()}-${input.fileName}`;
+      if (buffer.length > 7 * 1024 * 1024) throw new TRPCError({ code: "PAYLOAD_TOO_LARGE", message: "File must be under 7MB" });
+      const safeFileName = input.fileName.replace(/[^a-zA-Z0-9._-]/g, "_");
+      const key = `proof/${input.bookingId}/${Date.now()}-${safeFileName}`;
       const { url } = await storagePut(key, buffer, input.mimeType);
       await addJobUpdate({
         bookingId: input.bookingId,
@@ -515,9 +540,12 @@ const techJobsRouter = router({
       return { url };
     }),
 
-  notifications: publicProcedure
+  notifications: technicianProcedure
     .input(z.object({ technicianId: z.number() }))
-    .query(({ input }) => getNotificationsForTechnician(input.technicianId)),
+    .query(({ input, ctx }) => {
+      if (ctx.technicianId !== input.technicianId) throw new TRPCError({ code: "FORBIDDEN" });
+      return getNotificationsForTechnician(input.technicianId);
+    }),
 });
 
 // ─── Payments Router ──────────────────────────────────────────────────────────

@@ -19,10 +19,10 @@ export default function Services() {
       <div className="pt-24 pb-8">
         <div className="container">
           <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">All Services</Badge>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
             AC Services We Offer
           </h1>
-          <p className="text-muted-foreground text-lg max-w-2xl">
+          <p className="text-muted-foreground text-base sm:text-lg max-w-2xl">
             Professional AC services for all brands — Samsung, LG, Daikin, Voltas, Blue Star, and more.
           </p>
         </div>

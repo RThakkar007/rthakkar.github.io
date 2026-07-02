@@ -31,7 +31,7 @@
 - [x] Cancellation & Refund Policy page
 - [x] User registration page
 - [x] User login page
-- [ ] Forgot password page
+- [x] Forgot password page
 - [x] Guest booking with account creation prompt
 - [x] My Bookings page (customer dashboard)
 
@@ -67,4 +67,21 @@
 - [x] Vitest unit tests for core routers (8 tests passing)
 - [x] Responsive mobile design
 - [x] Final checkpoint saved
-- [ ] GitHub repository upload
+- [x] GitHub repository upload → https://github.com/RThakkar007/rthakkar.github.io/tree/main/arctic-ac-platform
+
+## Responsive & UX Polish
+- [x] Booking flow: auto-scroll to top of card on every step change
+- [x] Booking flow: mobile-friendly calendar and time slot grid
+- [x] Booking flow: address autocomplete mobile touch UX
+- [x] Navbar: mobile hamburger menu with slide-out drawer
+- [x] Navbar: hide nav links on mobile, show only logo + hamburger
+- [x] Homepage: responsive hero, services grid, stats on mobile
+- [x] Services page: responsive card grid on mobile
+- [x] Track Booking page: mobile-friendly timeline
+- [x] My Bookings page: mobile card layout
+- [x] About/Contact/Policy pages: mobile typography and spacing
+- [x] Admin Dashboard: collapsible sidebar on mobile/tablet
+- [x] Technician Portal: mobile-first layout for job cards
+- [x] Global: 44px min touch targets on all buttons and links
+- [x] Global: smooth scroll behavior, safe area insets for notched phones
+- [x] Global: font size scaling for small screens

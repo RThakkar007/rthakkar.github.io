@@ -22,6 +22,10 @@ export default function AdminLayout({ children, title }: { children: React.React
   const [, navigate] = useLocation();
 
   useEffect(() => {
+    setSidebarOpen(false);
+  }, [loc]);
+
+  useEffect(() => {
     if (!loading && (!user || user.role !== "admin")) {
       navigate("/");
     }
@@ -51,7 +55,7 @@ export default function AdminLayout({ children, title }: { children: React.React
         <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
           {NAV.map(item => (
             <Link key={item.href} href={item.href}>
-              <div className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all cursor-pointer ${loc === item.href ? "bg-primary/10 text-primary" : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"}`}>
+              <div className={`flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium transition-all cursor-pointer min-h-[44px] ${loc === item.href ? "bg-primary/10 text-primary" : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"}`}>
                 <item.icon className="w-4 h-4" />
                 {item.label}
               </div>
@@ -80,12 +84,12 @@ export default function AdminLayout({ children, title }: { children: React.React
       {/* Main content */}
       <div className="flex-1 lg:ml-64 flex flex-col min-h-screen">
         <header className="sticky top-0 z-30 h-16 border-b border-border bg-background/80 backdrop-blur-xl flex items-center px-6 gap-4">
-          <button className="lg:hidden" onClick={() => setSidebarOpen(!sidebarOpen)}>
+          <button className="lg:hidden p-2 rounded-lg hover:bg-muted/50 min-w-[44px] min-h-[44px] flex items-center justify-center -ml-2" onClick={() => setSidebarOpen(!sidebarOpen)}>
             {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
-          <h1 className="font-bold text-lg" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>{title}</h1>
+          <h1 className="font-bold text-base sm:text-lg flex-1 truncate" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>{title}</h1>
         </header>
-        <main className="flex-1 p-6">{children}</main>
+        <main className="flex-1 p-4 sm:p-6">{children}</main>
       </div>
     </div>
   );

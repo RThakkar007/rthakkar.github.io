@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useLocation } from "wouter";
+import { Link } from "wouter";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { getLoginUrl } from "@/const";
 import { Snowflake } from "lucide-react";
@@ -22,6 +23,9 @@ export default function Login() {
         </Button>
         <p className="mt-4 text-sm text-muted-foreground">
           Don't have an account? <a href={getLoginUrl()} className="text-primary hover:underline">Register here</a>
+        </p>
+        <p className="mt-2 text-sm text-muted-foreground">
+          <Link href="/forgot-password" className="text-primary hover:underline">Forgot your password?</Link>
         </p>
       </div>
     </div>

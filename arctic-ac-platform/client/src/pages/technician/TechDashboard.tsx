@@ -58,10 +58,10 @@ export default function TechDashboard() {
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <Button variant="outline" size="sm" onClick={handleUpdateLocation}>
+            <Button variant="outline" size="sm" className="min-h-[40px]" onClick={handleUpdateLocation}>
               <MapPin className="w-4 h-4 mr-1" /> Update GPS
             </Button>
-            <Button variant="ghost" size="icon" onClick={() => {
+            <Button variant="ghost" size="icon" className="min-w-[40px] min-h-[40px]" onClick={() => {
               localStorage.removeItem("tech_token");
               localStorage.removeItem("tech_id");
               localStorage.removeItem("tech_name");
@@ -106,7 +106,7 @@ export default function TechDashboard() {
                       <div>
                         <div className="font-mono font-bold text-primary text-sm">{job.bookingRef}</div>
                         <div className="text-sm text-muted-foreground flex items-center gap-1 mt-1">
-                          <Clock className="w-3.5 h-3.5" /> {new Date(job.scheduledAt).toLocaleString()}
+                          <Clock className="w-3.5 h-3.5" /> {new Date(job.scheduledAt).toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" })}
                         </div>
                       </div>
                       <Badge className="bg-yellow-500/10 text-yellow-400">New Request</Badge>
@@ -115,11 +115,11 @@ export default function TechDashboard() {
                       <MapPin className="w-3.5 h-3.5 mt-0.5 flex-shrink-0 text-primary" /> {job.address}
                     </div>
                     <div className="flex gap-3">
-                      <Button className="flex-1 btn-glow" size="sm"
+                      <Button className="flex-1 btn-glow min-h-[44px] text-sm" size="sm"
                         onClick={() => respondMutation.mutate({ bookingId: job.id, technicianId: techId, accept: true })}>
                         Accept Job
                       </Button>
-                      <Button variant="outline" size="sm"
+                      <Button variant="outline" size="sm" className="min-h-[44px] px-4"
                         onClick={() => respondMutation.mutate({ bookingId: job.id, technicianId: techId, accept: false })}>
                         Decline
                       </Button>
@@ -148,7 +148,7 @@ export default function TechDashboard() {
                     <div className="flex items-start gap-1 text-sm text-muted-foreground mb-4">
                       <MapPin className="w-3.5 h-3.5 mt-0.5 text-primary" /> {job.address}
                     </div>
-                    <Button className="w-full btn-glow" size="sm" asChild>
+                    <Button className="w-full btn-glow min-h-[44px]" size="sm" asChild>
                       <Link href={`/tech/job/${job.id}`}>View Job Details</Link>
                     </Button>
                   </CardContent>
@@ -165,8 +165,8 @@ export default function TechDashboard() {
           </div>
         )}
 
-        <div className="flex justify-center">
-          <Button variant="outline" asChild>
+        <div className="flex justify-center pb-safe-bottom pb-6">
+          <Button variant="outline" className="min-h-[44px]" asChild>
             <Link href="/tech/history"><History className="w-4 h-4 mr-2" /> View Job History</Link>
           </Button>
         </div>

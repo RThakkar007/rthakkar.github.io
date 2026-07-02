@@ -34,7 +34,7 @@ export default function Home() {
       <Navbar />
 
       {/* Hero */}
-      <section className="relative min-h-screen flex items-center pt-16 hero-gradient overflow-hidden">
+      <section className="relative min-h-[100svh] flex items-center pt-16 hero-gradient overflow-hidden">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-primary/5 blur-3xl" />
           <div className="absolute bottom-1/4 right-1/4 w-64 h-64 rounded-full bg-primary/8 blur-2xl" />
@@ -44,22 +44,22 @@ export default function Home() {
             <Badge className="mb-6 bg-primary/10 text-primary border-primary/20 hover:bg-primary/20">
               <Snowflake className="w-3 h-3 mr-1" /> On-Demand AC Services
             </Badge>
-            <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-6" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold leading-tight mb-4 sm:mb-6" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
               Your AC Fixed,{" "}
               <span className="gradient-text">Fast & Reliable</span>
             </h1>
-            <p className="text-xl text-muted-foreground mb-8 leading-relaxed max-w-2xl">
+            <p className="text-base sm:text-xl text-muted-foreground mb-6 sm:mb-8 leading-relaxed max-w-2xl">
               Professional AC repair, installation, and maintenance with real-time technician tracking. Book in 60 seconds, get service today.
             </p>
-            <div className="flex flex-wrap gap-4">
-              <Button size="lg" className="btn-glow text-base px-8 h-14" asChild>
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+              <Button size="lg" className="btn-glow text-base px-6 sm:px-8 h-12 sm:h-14 w-full sm:w-auto" asChild>
                 <Link href="/book">Book a Service <ArrowRight className="ml-2 w-5 h-5" /></Link>
               </Button>
-              <Button size="lg" variant="outline" className="text-base px-8 h-14" asChild>
+              <Button size="lg" variant="outline" className="text-base px-6 sm:px-8 h-12 sm:h-14 w-full sm:w-auto" asChild>
                 <Link href="/track/search">Track Booking</Link>
               </Button>
             </div>
-            <div className="mt-10 flex flex-wrap gap-6 text-sm text-muted-foreground">
+            <div className="mt-8 grid grid-cols-2 sm:flex sm:flex-wrap gap-3 sm:gap-6 text-sm text-muted-foreground">
               {["500+ Happy Customers", "50+ Expert Technicians", "Same Day Service", "All AC Brands"].map(t => (
                 <div key={t} className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-primary" /> {t}
@@ -114,7 +114,7 @@ export default function Home() {
             <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">How It Works</Badge>
             <h2 className="text-4xl font-bold" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>Simple. Fast. Reliable.</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
             {HOW_IT_WORKS.map((step, i) => (
               <div key={i} className="relative text-center">
                 {i < HOW_IT_WORKS.length - 1 && (
@@ -156,16 +156,16 @@ export default function Home() {
       {/* CTA */}
       <section className="py-20">
         <div className="container">
-          <div className="glass-card rounded-2xl p-12 text-center arctic-glow">
-            <h2 className="text-4xl font-bold mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+          <div className="glass-card rounded-2xl p-6 sm:p-12 text-center arctic-glow">
+            <h2 className="text-2xl sm:text-4xl font-bold mb-3 sm:mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
               Ready to Fix Your AC?
             </h2>
-            <p className="text-muted-foreground mb-8 text-lg">Book a service in 60 seconds. Expert technician at your door today.</p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Button size="lg" className="btn-glow px-10 h-14 text-base" asChild>
+            <p className="text-muted-foreground mb-6 sm:mb-8 text-base sm:text-lg">Book a service in 60 seconds. Expert technician at your door today.</p>
+            <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4">
+              <Button size="lg" className="btn-glow px-8 sm:px-10 h-12 sm:h-14 text-base w-full sm:w-auto" asChild>
                 <Link href="/book">Book Now — It's Fast <ArrowRight className="ml-2" /></Link>
               </Button>
-              <Button size="lg" variant="outline" className="px-10 h-14 text-base" asChild>
+              <Button size="lg" variant="outline" className="px-8 sm:px-10 h-12 sm:h-14 text-base w-full sm:w-auto" asChild>
                 <a href="tel:+919876543210"><Phone className="mr-2 w-5 h-5" /> Call Us</a>
               </Button>
             </div>

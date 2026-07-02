@@ -33,14 +33,15 @@ export default function TrackBooking() {
       <Navbar />
       <div className="pt-24 pb-20">
         <div className="container max-w-2xl mx-auto">
-          <h1 className="text-4xl font-bold mb-2 text-center" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>Track Your Booking</h1>
-          <p className="text-muted-foreground text-center mb-8">Enter your booking reference to see live status updates.</p>
+          <h1 className="text-2xl sm:text-4xl font-bold mb-2 text-center" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>Track Your Booking</h1>
+          <p className="text-muted-foreground text-center mb-6 sm:mb-8 text-sm sm:text-base px-2">Enter your booking reference to see live status updates.</p>
 
-          <div className="flex gap-3 mb-10">
+          <div className="flex flex-col sm:flex-row gap-3 mb-8 sm:mb-10 px-0">
             <Input placeholder="Enter booking ref (e.g. ACXXXXXXXX)" value={searchRef}
               onChange={e => setSearchRef(e.target.value.toUpperCase())}
-              onKeyDown={e => e.key === "Enter" && setQueryRef(searchRef)} />
-            <Button className="btn-glow" onClick={() => setQueryRef(searchRef)}>Track</Button>
+              onKeyDown={e => e.key === "Enter" && setQueryRef(searchRef)}
+              className="min-h-[48px] text-base" />
+            <Button className="btn-glow min-h-[48px] sm:flex-shrink-0 px-6" onClick={() => setQueryRef(searchRef)}>Track</Button>
           </div>
 
           {isLoading && <div className="text-center text-muted-foreground">Loading...</div>}
@@ -84,10 +85,10 @@ export default function TrackBooking() {
               <Card className="glass-card">
                 <CardContent className="p-6 space-y-3">
                   <h2 className="font-semibold mb-2">Booking Details</h2>
-                  <div className="flex justify-between text-sm"><span className="text-muted-foreground">Reference</span><span className="font-mono font-bold text-primary">{booking.bookingRef}</span></div>
-                  <div className="flex justify-between text-sm"><span className="text-muted-foreground">Scheduled</span><span>{new Date(booking.scheduledAt).toLocaleString()}</span></div>
-                  <div className="flex justify-between text-sm"><span className="text-muted-foreground">Address</span><span className="text-right max-w-xs">{booking.address}</span></div>
-                  <div className="flex justify-between text-sm"><span className="text-muted-foreground">Payment</span><span className="capitalize">{booking.paymentMethod === "cod" ? "Cash on Delivery" : "Razorpay"}</span></div>
+                  <div className="flex justify-between items-start gap-2 text-sm"><span className="text-muted-foreground flex-shrink-0">Reference</span><span className="font-mono font-bold text-primary text-right">{booking.bookingRef}</span></div>
+                  <div className="flex justify-between items-start gap-2 text-sm"><span className="text-muted-foreground flex-shrink-0">Scheduled</span><span className="text-right text-xs sm:text-sm">{new Date(booking.scheduledAt).toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" })}</span></div>
+                  <div className="flex justify-between items-start gap-2 text-sm"><span className="text-muted-foreground flex-shrink-0">Address</span><span className="text-right text-xs sm:text-sm leading-relaxed max-w-[60%]">{booking.address}</span></div>
+                  <div className="flex justify-between items-start gap-2 text-sm"><span className="text-muted-foreground flex-shrink-0">Payment</span><span className="capitalize">{booking.paymentMethod === "cod" ? "Cash on Delivery" : "Razorpay"}</span></div>
                 </CardContent>
               </Card>
             </div>

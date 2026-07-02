@@ -42,26 +42,26 @@ export default function MyBookings() {
       <Navbar />
       <div className="pt-24 pb-20">
         <div className="container max-w-3xl mx-auto">
-          <h1 className="text-4xl font-bold mb-8" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>My Bookings</h1>
+          <h1 className="text-2xl sm:text-4xl font-bold mb-6 sm:mb-8" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>My Bookings</h1>
           {isLoading ? (
             <div className="space-y-4">{[...Array(3)].map((_, i) => <div key={i} className="h-24 rounded-xl bg-card animate-pulse" />)}</div>
           ) : bookings && bookings.length > 0 ? (
             <div className="space-y-4">
               {bookings.map(b => (
                 <Card key={b.id} className="glass-card hover:border-primary/30 transition-all">
-                  <CardContent className="p-5 flex items-center justify-between gap-4">
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-3 mb-1">
-                        <span className="font-mono font-bold text-primary">{b.bookingRef}</span>
+                 <CardContent className="p-5 flex items-center justify-between gap-4">
+                    <div className="flex-1 min-w-0 space-y-1.5">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="font-mono font-bold text-primary text-sm">{b.bookingRef}</span>
                         <Badge className={`text-xs ${STATUS_COLOR[b.status] ?? ""}`}>{b.status.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase())}</Badge>
                       </div>
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <Clock className="w-3.5 h-3.5" />
-                        {new Date(b.scheduledAt).toLocaleString()}
+                      <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
+                        <Clock className="w-3.5 h-3.5 flex-shrink-0" />
+                        <span>{new Date(b.scheduledAt).toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" })}</span>
                       </div>
-                      <p className="text-sm text-muted-foreground truncate mt-1">{b.address}</p>
+                      <p className="text-xs sm:text-sm text-muted-foreground truncate">{b.address}</p>
                     </div>
-                    <Button size="sm" variant="outline" asChild>
+                    <Button size="sm" variant="outline" className="flex-shrink-0 min-h-[40px]" asChild>
                       <Link href={`/track/${b.bookingRef}`}>Track <ArrowRight className="ml-1 w-3 h-3" /></Link>
                     </Button>
                   </CardContent>
