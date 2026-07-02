@@ -80,7 +80,7 @@ export default function Navbar() {
           {/* Desktop right */}
           <div className="hidden md:flex items-center gap-2">
             <LanguageSwitcher />
-            <ThemeToggle />
+            <ThemeToggle compact />
             {isAuthenticated ? (
               <>
                 <Link href="/my-bookings" className="relative p-2 rounded-lg hover:bg-muted/50 transition-colors min-w-[40px] min-h-[40px] flex items-center justify-center">
@@ -117,9 +117,7 @@ export default function Navbar() {
           </div>
 
           {/* Mobile: bell + hamburger */}
-          <div className="flex md:hidden items-center gap-0.5">
-            <LanguageSwitcher />
-            <ThemeToggle />
+          <div className="flex md:hidden items-center gap-1">
             {isAuthenticated && (
               <Link href="/my-bookings" className="relative p-2 rounded-lg min-w-[44px] min-h-[44px] flex items-center justify-center">
                 <Bell className="w-5 h-5 text-muted-foreground" />
@@ -209,7 +207,15 @@ export default function Navbar() {
             </nav>
 
             {/* Bottom actions */}
-            <div className="p-4 border-t border-border space-y-2 flex-shrink-0">
+            {/* Language & Theme in drawer */}
+            <div className="px-3 py-2 border-t border-border flex-shrink-0">
+              <LanguageSwitcher inline />
+              <div className="flex items-center justify-between px-4 py-3">
+                <span className="text-sm font-medium text-foreground">Dark Mode</span>
+                <ThemeToggle />
+              </div>
+            </div>
+            <div className="px-4 pb-4 border-t border-border space-y-2 flex-shrink-0">
               {isAuthenticated ? (
                 <Button variant="outline" className="w-full gap-2 min-h-[48px]" onClick={() => { logout(); setMenuOpen(false); }}>
                   <LogOut className="w-4 h-4" /> {t.nav_logout}
