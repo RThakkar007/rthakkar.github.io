@@ -1,7 +1,9 @@
 import { Link } from "wouter";
 import { Snowflake, Phone, Mail, MapPin } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Footer() {
+  const { t } = useLanguage();
   return (
     <footer className="border-t border-border bg-card/50 mt-20">
       <div className="container py-12">
@@ -31,7 +33,7 @@ export default function Footer() {
             </div>
           </div>
           <div>
-            <h4 className="font-semibold mb-3 text-foreground">Services</h4>
+            <h4 className="font-semibold mb-3 text-foreground">{t.nav_services}</h4>
             <div className="flex flex-col gap-2">
               {["AC Installation", "AC Repair", "AC Service", "Deep Cleaning", "Gas Refill", "AMC Plans"].map(s => (
                 <Link key={s} href="/services" className="text-sm text-muted-foreground hover:text-primary transition-colors">{s}</Link>
@@ -39,7 +41,7 @@ export default function Footer() {
             </div>
           </div>
           <div>
-            <h4 className="font-semibold mb-3 text-foreground">Company</h4>
+            <h4 className="font-semibold mb-3 text-foreground">{t.footer_quick_links}</h4>
             <div className="flex flex-col gap-2">
               {[
                 { label: "About Us", href: "/about" },

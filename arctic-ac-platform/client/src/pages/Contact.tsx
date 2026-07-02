@@ -9,12 +9,14 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { toast } from "sonner";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Contact() {
+  const { t } = useLanguage();
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Message sent! We'll get back to you within 24 hours.");
+    toast.success(t.contact_success);
     setForm({ name: "", email: "", phone: "", message: "" });
   };
   return (
@@ -22,9 +24,9 @@ export default function Contact() {
       <Navbar />
       <div className="pt-24 pb-20">
         <div className="container max-w-5xl mx-auto">
-          <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">Contact Us</Badge>
-          <h1 className="text-3xl sm:text-5xl font-bold mb-3 sm:mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>Get in Touch</h1>
-          <p className="text-base sm:text-lg text-muted-foreground mb-8 sm:mb-12">Have a question or need help? We're here 24/7.</p>
+          <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">{t.contact_title}</Badge>
+          <h1 className="text-3xl sm:text-5xl font-bold mb-3 sm:mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>{t.contact_title}</h1>
+          <p className="text-base sm:text-lg text-muted-foreground mb-8 sm:mb-12">{t.contact_subtitle}</p>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
             <div>
               <div className="space-y-6 mb-8">
@@ -46,11 +48,11 @@ export default function Contact() {
             <Card className="glass-card">
               <CardContent className="p-5 sm:p-8">
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  <div><Label>Name</Label><Input className="mt-1" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} required /></div>
-                  <div><Label>Email</Label><Input type="email" className="mt-1" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} required /></div>
-                  <div><Label>Phone</Label><Input className="mt-1" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} /></div>
-                  <div><Label>Message</Label><Textarea className="mt-1" rows={5} value={form.message} onChange={e => setForm(f => ({ ...f, message: e.target.value }))} required /></div>
-                  <Button type="submit" className="w-full btn-glow min-h-[48px]">Send Message</Button>
+                  <div><Label>{t.contact_name}</Label><Input className="mt-1" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} required /></div>
+                  <div><Label>{t.contact_email_label}</Label><Input type="email" className="mt-1" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} required /></div>
+                  <div><Label>{t.contact_phone_label}</Label><Input className="mt-1" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} /></div>
+                  <div><Label>{t.contact_message}</Label><Textarea className="mt-1" rows={5} value={form.message} onChange={e => setForm(f => ({ ...f, message: e.target.value }))} required /></div>
+                  <Button type="submit" className="w-full btn-glow min-h-[48px]">{t.contact_send}</Button>
                 </form>
               </CardContent>
             </Card>

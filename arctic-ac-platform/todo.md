@@ -69,6 +69,24 @@
 - [x] Final checkpoint saved
 - [x] GitHub repository upload → https://github.com/RThakkar007/rthakkar.github.io/tree/main/arctic-ac-platform
 
+## i18n — Multilingual Support (EN/HI/GU)
+- [x] LanguageContext with localStorage persistence
+- [x] i18n.ts translation map — EN/HI/GU for all pages
+- [x] Language switcher in Navbar (desktop dropdown + mobile drawer)
+- [x] Dark/light mode toggle in Navbar
+- [x] Home.tsx — wired to useLanguage
+- [x] Services.tsx — wired to useLanguage
+- [x] Booking.tsx — wired to useLanguage
+- [x] TrackBooking.tsx — wired to useLanguage
+- [x] MyBookings.tsx — wired to useLanguage
+- [x] About.tsx — wired to useLanguage
+- [x] Contact.tsx — wired to useLanguage
+- [x] Login.tsx — wired to useLanguage
+- [x] Register.tsx — wired to useLanguage
+- [x] Footer.tsx — wired to useLanguage
+- [x] TypeScript: 0 errors after all wiring
+- [x] Tests: 33/33 passing after all wiring
+
 ## Responsive & UX Polish
 - [x] Booking flow: auto-scroll to top of card on every step change
 - [x] Booking flow: mobile-friendly calendar and time slot grid

@@ -8,6 +8,7 @@ import {
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { trpc } from "@/lib/trpc";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const STATIC_SERVICES = [
   {
@@ -63,6 +64,7 @@ const STATIC_SERVICES = [
 export default function Services() {
   const { data: dbServices } = trpc.services.list.useQuery();
   const services = dbServices && dbServices.length > 0 ? null : STATIC_SERVICES;
+  const { t } = useLanguage();
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -78,13 +80,13 @@ export default function Services() {
             <Snowflake className="h-3 w-3 mr-1.5" /> All Services
           </Badge>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4">
-            Professional AC Services at{" "}
+            {t.services_page_title}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-400">
-              Transparent Prices
+              {""}
             </span>
           </h1>
           <p className="text-muted-foreground text-base sm:text-lg mb-8">
-            No hidden charges. Upfront quotes. 30-day workmanship warranty on all services.
+            {t.services_page_subtitle}
           </p>
           <div className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">
             {["All AC Brands", "Same-Day Service", "Verified Technicians", "COD Available"].map((t) => (
@@ -166,7 +168,7 @@ export default function Services() {
       {/* Brands */}
       <section className="pb-20">
         <div className="container text-center">
-          <p className="text-xs text-muted-foreground uppercase tracking-widest mb-6">We service all major brands</p>
+          <p className="text-xs text-muted-foreground uppercase tracking-widest mb-6">{t.services_all_brands}</p>
           <div className="flex flex-wrap justify-center gap-3">
             {["Daikin", "Voltas", "LG", "Samsung", "Blue Star", "Hitachi", "Carrier", "Panasonic", "Whirlpool", "O General"].map((brand) => (
               <span key={brand} className="px-4 py-2 rounded-lg border border-border bg-card/50 text-sm text-muted-foreground hover:text-foreground hover:border-primary/40 transition-colors">

@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { trpc } from "@/lib/trpc";
 import { CheckCircle, Clock, MapPin, User, Phone } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const STATUS_STEPS = [
   { key: "pending", label: "Booking Placed", icon: Clock },
@@ -16,6 +17,7 @@ const STATUS_STEPS = [
 ];
 
 export default function TrackBooking() {
+  const { t } = useLanguage();
   const { ref: paramRef } = useParams<{ ref: string }>();
   const [searchRef, setSearchRef] = useState(paramRef === "search" ? "" : (paramRef ?? ""));
   const [queryRef, setQueryRef] = useState(paramRef && paramRef !== "search" ? paramRef : "");
@@ -33,8 +35,8 @@ export default function TrackBooking() {
       <Navbar />
       <div className="pt-24 pb-20">
         <div className="container max-w-2xl mx-auto">
-          <h1 className="text-2xl sm:text-4xl font-bold mb-2 text-center" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>Track Your Booking</h1>
-          <p className="text-muted-foreground text-center mb-6 sm:mb-8 text-sm sm:text-base px-2">Enter your booking reference to see live status updates.</p>
+          <h1 className="text-2xl sm:text-4xl font-bold mb-2 text-center" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>{t.track_status}</h1>
+          <p className="text-muted-foreground text-center mb-6 sm:mb-8 text-sm sm:text-base px-2">{t.track_not_found}</p>
 
           <div className="flex flex-col sm:flex-row gap-3 mb-8 sm:mb-10 px-0">
             <Input placeholder="Enter booking ref (e.g. ACXXXXXXXX)" value={searchRef}
@@ -51,7 +53,7 @@ export default function TrackBooking() {
               {/* Status stepper */}
               <Card className="glass-card">
                 <CardContent className="p-6">
-                  <h2 className="font-semibold mb-6">Live Status</h2>
+                  <h2 className="font-semibold mb-6">{t.track_status}</h2>
                   <div className="flex flex-col gap-0">
                     {STATUS_STEPS.map((s, i) => {
                       const done = i <= activeIndex;
@@ -84,10 +86,10 @@ export default function TrackBooking() {
               {/* Booking details */}
               <Card className="glass-card">
                 <CardContent className="p-6 space-y-3">
-                  <h2 className="font-semibold mb-2">Booking Details</h2>
-                  <div className="flex justify-between items-start gap-2 text-sm"><span className="text-muted-foreground flex-shrink-0">Reference</span><span className="font-mono font-bold text-primary text-right">{booking.bookingRef}</span></div>
-                  <div className="flex justify-between items-start gap-2 text-sm"><span className="text-muted-foreground flex-shrink-0">Scheduled</span><span className="text-right text-xs sm:text-sm">{new Date(booking.scheduledAt).toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" })}</span></div>
-                  <div className="flex justify-between items-start gap-2 text-sm"><span className="text-muted-foreground flex-shrink-0">Address</span><span className="text-right text-xs sm:text-sm leading-relaxed max-w-[60%]">{booking.address}</span></div>
+                  <h2 className="font-semibold mb-2">{t.booking_ref_number}</h2>
+                  <div className="flex justify-between items-start gap-2 text-sm"><span className="text-muted-foreground flex-shrink-0">{t.booking_ref_number}</span><span className="font-mono font-bold text-primary text-right">{booking.bookingRef}</span></div>
+                  <div className="flex justify-between items-start gap-2 text-sm"><span className="text-muted-foreground flex-shrink-0">{t.track_scheduled}</span><span className="text-right text-xs sm:text-sm">{new Date(booking.scheduledAt).toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" })}</span></div>
+                  <div className="flex justify-between items-start gap-2 text-sm"><span className="text-muted-foreground flex-shrink-0">{t.track_address}</span><span className="text-right text-xs sm:text-sm leading-relaxed max-w-[60%]">{booking.address}</span></div>
                   <div className="flex justify-between items-start gap-2 text-sm"><span className="text-muted-foreground flex-shrink-0">Payment</span><span className="capitalize">{booking.paymentMethod === "cod" ? "Cash on Delivery" : "Razorpay"}</span></div>
                 </CardContent>
               </Card>

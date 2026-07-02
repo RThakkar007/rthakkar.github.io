@@ -123,6 +123,86 @@ export interface Translations {
   common_close: string;
   common_submit: string;
   common_call_now: string;
+  // Services
+  services_page_title: string;
+  services_page_subtitle: string;
+  services_all_brands: string;
+  services_book_service: string;
+  services_features: string;
+  // Booking
+  booking_choose_date: string;
+  booking_choose_time: string;
+  booking_guest_note: string;
+  booking_create_account: string;
+  booking_success_title: string;
+  booking_success_subtitle: string;
+  booking_ref_number: string;
+  booking_view_bookings: string;
+  booking_track_booking: string;
+  // Track
+  track_status: string;
+  track_technician: string;
+  track_service: string;
+  track_scheduled: string;
+  track_address: string;
+  track_not_found: string;
+  track_contact_support: string;
+  // MyBookings
+  mybookings_title: string;
+  mybookings_subtitle: string;
+  mybookings_no_bookings: string;
+  mybookings_book_first: string;
+  mybookings_status_pending: string;
+  mybookings_status_assigned: string;
+  mybookings_status_on_way: string;
+  mybookings_status_completed: string;
+  mybookings_status_cancelled: string;
+  mybookings_track: string;
+  mybookings_view: string;
+  // About
+  about_title: string;
+  about_subtitle: string;
+  about_mission_title: string;
+  about_mission_text: string;
+  about_stat1: string;
+  about_stat2: string;
+  about_stat3: string;
+  about_stat4: string;
+  // Contact
+  contact_title: string;
+  contact_subtitle: string;
+  contact_name: string;
+  contact_email_label: string;
+  contact_phone_label: string;
+  contact_message: string;
+  contact_send: string;
+  contact_success: string;
+  contact_hours_title: string;
+  contact_hours_weekday: string;
+  contact_hours_weekend: string;
+  // Auth
+  login_title: string;
+  login_subtitle: string;
+  login_email: string;
+  login_password: string;
+  login_submit: string;
+  login_no_account: string;
+  login_register_link: string;
+  login_forgot: string;
+  register_title: string;
+  register_subtitle: string;
+  register_name: string;
+  register_email: string;
+  register_phone: string;
+  register_password: string;
+  register_submit: string;
+  register_have_account: string;
+  register_login_link: string;
+  // Footer
+  footer_quick_links: string;
+  footer_book_now: string;
+  footer_track: string;
+  footer_emergency: string;
 }
 
 export const translations: Record<Language, Translations> = {
@@ -234,6 +314,78 @@ export const translations: Record<Language, Translations> = {
     common_close: "Close",
     common_submit: "Submit",
     common_call_now: "Call Now",
+    services_page_title: "Our AC Services",
+    services_page_subtitle: "Professional AC services with transparent pricing and a 30-day workmanship warranty.",
+    services_all_brands: "We service all major brands",
+    services_book_service: "Book This Service",
+    services_features: "What's Included",
+    booking_choose_date: "Choose Date",
+    booking_choose_time: "Choose Time Slot",
+    booking_guest_note: "Booking as guest. Create an account to track your bookings.",
+    booking_create_account: "Create Account",
+    booking_success_title: "Booking Confirmed!",
+    booking_success_subtitle: "Your technician will be assigned shortly. You'll receive updates via SMS.",
+    booking_ref_number: "Booking Reference",
+    booking_view_bookings: "View My Bookings",
+    booking_track_booking: "Track This Booking",
+    track_status: "Current Status",
+    track_technician: "Your Technician",
+    track_service: "Service",
+    track_scheduled: "Scheduled For",
+    track_address: "Service Address",
+    track_not_found: "Booking not found. Please check your reference number.",
+    track_contact_support: "Contact Support",
+    mybookings_title: "My Bookings",
+    mybookings_subtitle: "Track and manage all your service bookings.",
+    mybookings_no_bookings: "No bookings yet",
+    mybookings_book_first: "Book your first AC service today.",
+    mybookings_status_pending: "Pending",
+    mybookings_status_assigned: "Assigned",
+    mybookings_status_on_way: "On the Way",
+    mybookings_status_completed: "Completed",
+    mybookings_status_cancelled: "Cancelled",
+    mybookings_track: "Track",
+    mybookings_view: "View Details",
+    about_title: "About ArcticAC",
+    about_subtitle: "We're on a mission to make AC service fast, transparent, and reliable for every Indian home.",
+    about_mission_title: "Our Mission",
+    about_mission_text: "To deliver professional, on-demand AC services with real-time tracking, verified technicians, and transparent pricing.",
+    about_stat1: "Happy Customers",
+    about_stat2: "Expert Technicians",
+    about_stat3: "Cities Covered",
+    about_stat4: "Avg Response Time",
+    contact_title: "Contact Us",
+    contact_subtitle: "Have a question or need help? We're here for you.",
+    contact_name: "Your Name",
+    contact_email_label: "Email Address",
+    contact_phone_label: "Phone Number",
+    contact_message: "Your Message",
+    contact_send: "Send Message",
+    contact_success: "Message sent! We'll get back to you within 24 hours.",
+    contact_hours_title: "Working Hours",
+    contact_hours_weekday: "Monday – Saturday: 8:00 AM – 8:00 PM",
+    contact_hours_weekend: "Sunday: 9:00 AM – 5:00 PM",
+    login_title: "Welcome Back",
+    login_subtitle: "Sign in to manage your bookings.",
+    login_email: "Email Address",
+    login_password: "Password",
+    login_submit: "Sign In",
+    login_no_account: "Don't have an account?",
+    login_register_link: "Register",
+    login_forgot: "Forgot password?",
+    register_title: "Create Account",
+    register_subtitle: "Join ArcticAC for faster bookings and real-time tracking.",
+    register_name: "Full Name",
+    register_email: "Email Address",
+    register_phone: "Phone Number",
+    register_password: "Password",
+    register_submit: "Create Account",
+    register_have_account: "Already have an account?",
+    register_login_link: "Sign In",
+    footer_quick_links: "Quick Links",
+    footer_book_now: "Book a Service",
+    footer_track: "Track Booking",
+    footer_emergency: "Emergency? Call us",
   },
   hi: {
     nav_home: "होम",
@@ -343,6 +495,78 @@ export const translations: Record<Language, Translations> = {
     common_close: "बंद करें",
     common_submit: "सबमिट करें",
     common_call_now: "अभी कॉल करें",
+    services_page_title: "हमारी AC सेवाएं",
+    services_page_subtitle: "पारदर्शी मूल्य और 30-दिन की वारंटी के साथ प्रोफेशनल AC सेवाएं।",
+    services_all_brands: "हम सभी प्रमुख ब्रांड सर्विस करते हैं",
+    services_book_service: "यह सेवा बुक करें",
+    services_features: "क्या शामिल है",
+    booking_choose_date: "तारीख चुनें",
+    booking_choose_time: "समय स्लॉट चुनें",
+    booking_guest_note: "अतिथि के रूप में बुकिंग। ट्रैक करने के लिए खाता बनाएं।",
+    booking_create_account: "खाता बनाएं",
+    booking_success_title: "बुकिंग की पुष्टि हो गई!",
+    booking_success_subtitle: "आपका टेक्नीशियन जल्द ही असाइन किया जाएगा।",
+    booking_ref_number: "बुकिंग संदर्भ",
+    booking_view_bookings: "मेरी बुकिंग देखें",
+    booking_track_booking: "इस बुकिंग को ट्रैक करें",
+    track_status: "वर्तमान स्थिति",
+    track_technician: "आपका टेक्नीशियन",
+    track_service: "सेवा",
+    track_scheduled: "निर्धारित समय",
+    track_address: "सेवा पता",
+    track_not_found: "बुकिंग नहीं मिली। कृपया संदर्भ नंबर जांचें।",
+    track_contact_support: "सहायता से संपर्क करें",
+    mybookings_title: "मेरी बुकिंग",
+    mybookings_subtitle: "अपनी सभी सेवा बुकिंग ट्रैक और प्रबंधित करें।",
+    mybookings_no_bookings: "अभी तक कोई बुकिंग नहीं",
+    mybookings_book_first: "आज ही अपनी पहली AC सेवा बुक करें।",
+    mybookings_status_pending: "लंबित",
+    mybookings_status_assigned: "असाइन किया गया",
+    mybookings_status_on_way: "रास्ते में",
+    mybookings_status_completed: "पूर्ण",
+    mybookings_status_cancelled: "रद्द",
+    mybookings_track: "ट्रैक करें",
+    mybookings_view: "विवरण देखें",
+    about_title: "ArcticAC के बारे में",
+    about_subtitle: "हम हर भारतीय घर के लिए AC सेवा को तेज़, पारदर्शी और विश्वसनीय बनाने के मिशन पर हैं।",
+    about_mission_title: "हमारा मिशन",
+    about_mission_text: "रियल-टाइम ट्रैकिंग, सत्यापित टेक्नीशियन और पारदर्शी मूल्य के साथ प्रोफेशनल AC सेवाएं।",
+    about_stat1: "खुश ग्राहक",
+    about_stat2: "विशेषज्ञ टेक्नीशियन",
+    about_stat3: "शहर कवर",
+    about_stat4: "औसत प्रतिक्रिया समय",
+    contact_title: "हमसे संपर्क करें",
+    contact_subtitle: "कोई सवाल है या मदद चाहिए? हम आपके लिए यहाँ हैं।",
+    contact_name: "आपका नाम",
+    contact_email_label: "ईमेल पता",
+    contact_phone_label: "फोन नंबर",
+    contact_message: "आपका संदेश",
+    contact_send: "संदेश भेजें",
+    contact_success: "संदेश भेजा गया! हम 24 घंटे के भीतर संपर्क करेंगे।",
+    contact_hours_title: "कार्य समय",
+    contact_hours_weekday: "सोमवार – शनिवार: सुबह 8:00 – शाम 8:00",
+    contact_hours_weekend: "रविवार: सुबह 9:00 – शाम 5:00",
+    login_title: "वापस स्वागत है",
+    login_subtitle: "अपनी बुकिंग प्रबंधित करने के लिए साइन इन करें।",
+    login_email: "ईमेल पता",
+    login_password: "पासवर्ड",
+    login_submit: "साइन इन करें",
+    login_no_account: "खाता नहीं है?",
+    login_register_link: "रजिस्टर करें",
+    login_forgot: "पासवर्ड भूल गए?",
+    register_title: "खाता बनाएं",
+    register_subtitle: "तेज़ बुकिंग और रियल-टाइम ट्रैकिंग के लिए ArcticAC से जुड़ें।",
+    register_name: "पूरा नाम",
+    register_email: "ईमेल पता",
+    register_phone: "फोन नंबर",
+    register_password: "पासवर्ड",
+    register_submit: "खाता बनाएं",
+    register_have_account: "पहले से खाता है?",
+    register_login_link: "साइन इन करें",
+    footer_quick_links: "त्वरित लिंक",
+    footer_book_now: "सेवा बुक करें",
+    footer_track: "बुकिंग ट्रैक करें",
+    footer_emergency: "आपातकाल? हमें कॉल करें",
   },
   gu: {
     nav_home: "હોમ",
@@ -452,6 +676,78 @@ export const translations: Record<Language, Translations> = {
     common_close: "બંધ કરો",
     common_submit: "સબમિટ કરો",
     common_call_now: "હવે ફોન કરો",
+    services_page_title: "અમારી AC સેવાઓ",
+    services_page_subtitle: "પારદર્શક ભાવ અને 30-દિવસની વોરંટી સાથે વ્યાવસાયિક AC સેવાઓ.",
+    services_all_brands: "અમે તમામ મુખ્ય બ્રાન્ડ સર્વિસ કરીએ છીએ",
+    services_book_service: "આ સેવા બુક કરો",
+    services_features: "શું સામેલ છે",
+    booking_choose_date: "તારીખ પસંદ કરો",
+    booking_choose_time: "સમય સ્લૉટ પસંદ કરો",
+    booking_guest_note: "અતિથિ તરીકે બુકિંગ. ટ્રૅક કરવા ખાતું બનાવો.",
+    booking_create_account: "ખાતું બનાવો",
+    booking_success_title: "બુકિંગ કન્ફર્મ થઈ!",
+    booking_success_subtitle: "ટેકનિશિયન ટૂંક સમયમાં સોંપવામાં આવશે.",
+    booking_ref_number: "બુકિંગ સંદર્ભ",
+    booking_view_bookings: "મારી બુકિંગ જુઓ",
+    booking_track_booking: "આ બુકિંગ ટ્રૅક કરો",
+    track_status: "વર્તમાન સ્થિતિ",
+    track_technician: "તમારો ટેકનિશિયન",
+    track_service: "સેવા",
+    track_scheduled: "નિર્ધારિત સમય",
+    track_address: "સેવા સરનામું",
+    track_not_found: "બુકિંગ મળ્યું નહીં. સંદર્ભ નંબર તપાસો.",
+    track_contact_support: "સહાય સંપર્ક કરો",
+    mybookings_title: "મારી બુકિંગ",
+    mybookings_subtitle: "તમારી તમામ સેવા બુકિંગ ટ્રૅક અને મેનેજ કરો.",
+    mybookings_no_bookings: "હજુ કોઈ બુકિંગ નહીં",
+    mybookings_book_first: "આજે પ્રથમ AC સેવા બુક કરો.",
+    mybookings_status_pending: "બાકી",
+    mybookings_status_assigned: "સોંપ્યો",
+    mybookings_status_on_way: "રસ્તામાં",
+    mybookings_status_completed: "પૂર્ણ",
+    mybookings_status_cancelled: "રદ",
+    mybookings_track: "ટ્રૅક કરો",
+    mybookings_view: "વિગત જુઓ",
+    about_title: "ArcticAC વિશે",
+    about_subtitle: "અમે દરેક ભારતીય ઘર માટે AC સેવાને ઝડપી, પારદર્શક અને વિશ્વસનીય બનાવવાના મિશન પર છીએ.",
+    about_mission_title: "અમારું મિશન",
+    about_mission_text: "રિયલ-ટાઇમ ટ્રેકિંગ, ચકાસાયેલ ટેકનિશિયન અને પારદર્શક ભાવ સાથે AC સેવાઓ.",
+    about_stat1: "ખુશ ગ્રાહકો",
+    about_stat2: "નિષ્ણાત ટેકનિશિયન",
+    about_stat3: "શહેરો આવરી",
+    about_stat4: "સરેરાશ પ્રતિભાવ સમય",
+    contact_title: "અમારો સંપર્ક કરો",
+    contact_subtitle: "કોઈ પ્રશ્ન છે? અમે અહીં છીએ.",
+    contact_name: "તમારું નામ",
+    contact_email_label: "ઈ-મેઈલ",
+    contact_phone_label: "ફોન નંબર",
+    contact_message: "તમારો સંદેશ",
+    contact_send: "સંદેશ મોકલો",
+    contact_success: "સંદેશ મોકલ્યો! 24 કલાકમાં સંપર્ક કરીશું.",
+    contact_hours_title: "કામના કલાકો",
+    contact_hours_weekday: "સોમ – શનિ: સવારે 8:00 – સાંજે 8:00",
+    contact_hours_weekend: "રવિ: સવારે 9:00 – સાંજે 5:00",
+    login_title: "પાછા સ્વાગત છે",
+    login_subtitle: "બુકિંગ મેનેજ કરવા સાઇન ઇન કરો.",
+    login_email: "ઈ-મેઈલ",
+    login_password: "પાસવર્ડ",
+    login_submit: "સાઇન ઇન કરો",
+    login_no_account: "ખાતું નથી?",
+    login_register_link: "નોંધણી કરો",
+    login_forgot: "પાસવર્ડ ભૂલ્યા?",
+    register_title: "ખાતું બનાવો",
+    register_subtitle: "ઝડપી બુકિંગ માટે ArcticAC સાથે જોડાઓ.",
+    register_name: "પૂરું નામ",
+    register_email: "ઈ-મેઈલ",
+    register_phone: "ફોન નંબર",
+    register_password: "પાસવર્ડ",
+    register_submit: "ખાતું બનાવો",
+    register_have_account: "પહેલેથી ખાતું છે?",
+    register_login_link: "સાઇન ઇન કરો",
+    footer_quick_links: "ઝડપી લિંક",
+    footer_book_now: "સેવા બુક કરો",
+    footer_track: "બુકિંગ ટ્રૅક કરો",
+    footer_emergency: "કટોકટી? અમને ફોન કરો",
   },
 };
 

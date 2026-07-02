@@ -13,6 +13,7 @@ import { toast } from "sonner";
 import { CheckCircle, Calendar, CreditCard, User, Snowflake, ChevronRight } from "lucide-react";
 import AddressAutocomplete from "@/components/AddressAutocomplete";
 import DateTimePicker from "@/components/DateTimePicker";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const STEPS = ["Service", "Schedule", "Details", "Payment"];
 
@@ -26,6 +27,7 @@ const DEMO_SERVICES = [
 ];
 
 export default function Booking() {
+  const { t } = useLanguage();
   const [, navigate] = useLocation();
   const { user, isAuthenticated } = useAuth();
   const [step, setStep] = useState(0);
@@ -55,7 +57,7 @@ export default function Booking() {
 
   const createBooking = trpc.bookings.create.useMutation({
     onSuccess: (data) => {
-      toast.success("Booking confirmed!");
+      toast.success(t.booking_success_title);
       navigate(`/booking/confirmation/${data.bookingRef}`);
     },
     onError: (e) => toast.error(e.message),
@@ -66,7 +68,7 @@ export default function Booking() {
 
   const handleSubmit = () => {
     if (!form.serviceId || !form.scheduledAt || !form.address || form.address.trim().length < 5) {
-      toast.error("Please fill in all required fields.");
+      toast.error(t.booking_guest_note);
       return;
     }
     createBooking.mutate({
@@ -91,10 +93,10 @@ export default function Booking() {
           {/* Header */}
           <div className="mb-6 text-center pt-4">
             <h1 className="text-3xl sm:text-4xl font-bold mb-2" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-              Book a Service
+              {t.footer_book_now}
             </h1>
             <p className="text-muted-foreground text-sm sm:text-base">
-              Get a certified technician at your door today.
+              {t.booking_guest_note}
             </p>
           </div>
 
