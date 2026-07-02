@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: cooltech-ac-services
+    runtime: node
+    rootDir: cooltech-ac-services
+    buildCommand: npm install -g pnpm && pnpm install && pnpm build
+    startCommand: node dist/index.js
+    healthCheckPath: /api/trpc/system.health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: VITE_APP_TITLE
+        value: CoolTech AC Services
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: VITE_STRIPE_PUBLISHABLE_KEY
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
+    plan: free
+    autoDeploy: true
