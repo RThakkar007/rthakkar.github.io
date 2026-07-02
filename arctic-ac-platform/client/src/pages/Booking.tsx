@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { toast } from "sonner";
-import { CheckCircle, Calendar, CreditCard, User, Snowflake, ChevronRight } from "lucide-react";
+import { CheckCircle, Calendar, CreditCard, User, Snowflake, ChevronRight, AlertCircle } from "lucide-react";
 import AddressAutocomplete from "@/components/AddressAutocomplete";
 import DateTimePicker from "@/components/DateTimePicker";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -42,6 +42,34 @@ export default function Booking() {
     guestEmail: "",
     guestPhone: "",
   });
+  const [guestErrors, setGuestErrors] = useState<{ guestName?: string; guestEmail?: string; guestPhone?: string }>({});
+  const [guestTouched, setGuestTouched] = useState<{ guestName?: boolean; guestEmail?: boolean; guestPhone?: boolean }>({});
+  const [step1Errors, setStep1Errors] = useState<{ scheduledAt?: string; address?: string }>({});
+
+  const validateGuest = (f: typeof form) => {
+    const e: { guestName?: string; guestEmail?: string; guestPhone?: string } = {};
+    if (!f.guestName.trim()) e.guestName = "Full name is required.";
+    if (!f.guestEmail.trim()) e.guestEmail = "Email is required.";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.guestEmail.trim())) e.guestEmail = "Please enter a valid email.";
+    if (!f.guestPhone.trim()) e.guestPhone = "Phone number is required.";
+    else if (!/^[+\d\s\-()]{7,15}$/.test(f.guestPhone.trim())) e.guestPhone = "Please enter a valid phone number.";
+    return e;
+  };
+
+  const handleGuestBlur = (field: "guestName" | "guestEmail" | "guestPhone") => {
+    setGuestTouched(prev => ({ ...prev, [field]: true }));
+    const errs = validateGuest(form);
+    setGuestErrors(prev => ({ ...prev, [field]: errs[field] }));
+  };
+
+  const handleGuestChange = (field: "guestName" | "guestEmail" | "guestPhone", value: string) => {
+    const updated = { ...form, [field]: value };
+    setForm(f => ({ ...f, [field]: value }));
+    if (guestTouched[field]) {
+      const errs = validateGuest(updated);
+      setGuestErrors(prev => ({ ...prev, [field]: errs[field] }));
+    }
+  };
 
   // Auto-scroll to top of card on every step change
   const goToStep = (n: number) => {
@@ -67,9 +95,26 @@ export default function Booking() {
   const canProceedStep1 = form.scheduledAt && form.address && form.address.trim().length >= 5;
 
   const handleSubmit = () => {
-    if (!form.serviceId || !form.scheduledAt || !form.address || form.address.trim().length < 5) {
-      toast.error(t.booking_guest_note);
+    if (!form.serviceId) {
+      toast.error("Please select a service first.");
       return;
+    }
+    if (!form.scheduledAt) {
+      toast.error("Please select a date and time.");
+      return;
+    }
+    if (!form.address || form.address.trim().length < 5) {
+      toast.error("Please enter a valid service address.");
+      return;
+    }
+    if (!isAuthenticated) {
+      const gErrs = validateGuest(form);
+      setGuestTouched({ guestName: true, guestEmail: true, guestPhone: true });
+      setGuestErrors(gErrs);
+      if (Object.keys(gErrs).length > 0) {
+        toast.error("Please fill in all required guest details.");
+        return;
+      }
     }
     createBooking.mutate({
       serviceId: form.serviceId,
@@ -96,7 +141,7 @@ export default function Booking() {
               {t.footer_book_now}
             </h1>
             <p className="text-muted-foreground text-sm sm:text-base">
-              {t.booking_guest_note}
+              Get a certified technician at your door today.
             </p>
           </div>
 
@@ -153,8 +198,13 @@ export default function Booking() {
                       </button>
                     ))}
                   </div>
+                  {!form.serviceId && (
+                    <p className="mt-3 text-xs text-muted-foreground text-center flex items-center justify-center gap-1">
+                      <AlertCircle className="w-3 h-3" /> Please select a service to continue.
+                    </p>
+                  )}
                   <Button
-                    className="mt-6 w-full btn-glow min-h-[48px] text-base gap-2"
+                    className="mt-3 w-full btn-glow min-h-[48px] text-base gap-2"
                     disabled={!form.serviceId}
                     onClick={() => goToStep(1)}
                   >
@@ -171,19 +221,28 @@ export default function Booking() {
                   </h2>
                   <div className="space-y-6">
                     <div>
-                      <Label className="text-sm font-medium mb-2 block">Preferred Date & Time *</Label>
+                      <Label className="text-sm font-medium mb-2 block">Preferred Date & Time <span className="text-destructive">*</span></Label>
                       <DateTimePicker
                         value={form.scheduledAt}
-                        onChange={val => setForm(f => ({ ...f, scheduledAt: val }))}
+                        onChange={val => { setForm(f => ({ ...f, scheduledAt: val })); setStep1Errors(e => ({ ...e, scheduledAt: undefined })); }}
                       />
+                      {step1Errors.scheduledAt && (
+                        <p className="mt-1 text-xs text-destructive flex items-center gap-1"><AlertCircle className="w-3 h-3" /> {step1Errors.scheduledAt}</p>
+                      )}
                     </div>
                     <div>
-                      <Label className="text-sm font-medium mb-2 block">Service Address *</Label>
+                      <Label className="text-sm font-medium mb-2 block">Service Address <span className="text-destructive">*</span></Label>
                       <AddressAutocomplete
                         value={form.address}
-                        onChange={addr => setForm(f => ({ ...f, address: addr }))}
+                        onChange={addr => { setForm(f => ({ ...f, address: addr })); setStep1Errors(e => ({ ...e, address: undefined })); }}
                         error={!!(form.address && form.address.trim().length < 5)}
                       />
+                      {step1Errors.address && (
+                        <p className="mt-1 text-xs text-destructive flex items-center gap-1"><AlertCircle className="w-3 h-3" /> {step1Errors.address}</p>
+                      )}
+                      {form.address && form.address.trim().length < 5 && form.address.trim().length > 0 && (
+                        <p className="mt-1 text-xs text-destructive flex items-center gap-1"><AlertCircle className="w-3 h-3" /> Address is too short. Please enter a complete address.</p>
+                      )}
                     </div>
                     <div>
                       <Label className="text-sm font-medium mb-2 block">Additional Notes</Label>
@@ -236,22 +295,65 @@ export default function Booking() {
                         to track your booking easily.
                       </div>
                       <div>
-                        <Label className="text-sm">Full Name *</Label>
-                        <Input className="mt-1 min-h-[44px]" value={form.guestName} onChange={e => setForm(f => ({ ...f, guestName: e.target.value }))} />
+                        <Label className="text-sm">Full Name <span className="text-destructive">*</span></Label>
+                        <Input
+                          className={`mt-1 min-h-[44px] ${guestTouched.guestName && guestErrors.guestName ? "border-destructive focus-visible:ring-destructive" : ""}`}
+                          value={form.guestName}
+                          onChange={e => handleGuestChange("guestName", e.target.value)}
+                          onBlur={() => handleGuestBlur("guestName")}
+                          autoComplete="name"
+                          placeholder="Your full name"
+                        />
+                        {guestTouched.guestName && guestErrors.guestName && (
+                          <p className="mt-1 text-xs text-destructive flex items-center gap-1"><AlertCircle className="w-3 h-3" /> {guestErrors.guestName}</p>
+                        )}
                       </div>
                       <div>
-                        <Label className="text-sm">Email *</Label>
-                        <Input type="email" className="mt-1 min-h-[44px]" value={form.guestEmail} onChange={e => setForm(f => ({ ...f, guestEmail: e.target.value }))} />
+                        <Label className="text-sm">Email <span className="text-destructive">*</span></Label>
+                        <Input
+                          type="email"
+                          className={`mt-1 min-h-[44px] ${guestTouched.guestEmail && guestErrors.guestEmail ? "border-destructive focus-visible:ring-destructive" : ""}`}
+                          value={form.guestEmail}
+                          onChange={e => handleGuestChange("guestEmail", e.target.value)}
+                          onBlur={() => handleGuestBlur("guestEmail")}
+                          autoComplete="email"
+                          placeholder="you@example.com"
+                        />
+                        {guestTouched.guestEmail && guestErrors.guestEmail && (
+                          <p className="mt-1 text-xs text-destructive flex items-center gap-1"><AlertCircle className="w-3 h-3" /> {guestErrors.guestEmail}</p>
+                        )}
                       </div>
                       <div>
-                        <Label className="text-sm">Phone *</Label>
-                        <Input type="tel" className="mt-1 min-h-[44px]" value={form.guestPhone} onChange={e => setForm(f => ({ ...f, guestPhone: e.target.value }))} />
+                        <Label className="text-sm">Phone <span className="text-destructive">*</span></Label>
+                        <Input
+                          type="tel"
+                          className={`mt-1 min-h-[44px] ${guestTouched.guestPhone && guestErrors.guestPhone ? "border-destructive focus-visible:ring-destructive" : ""}`}
+                          value={form.guestPhone}
+                          onChange={e => handleGuestChange("guestPhone", e.target.value)}
+                          onBlur={() => handleGuestBlur("guestPhone")}
+                          autoComplete="tel"
+                          placeholder="+91 98765 43210"
+                        />
+                        {guestTouched.guestPhone && guestErrors.guestPhone && (
+                          <p className="mt-1 text-xs text-destructive flex items-center gap-1"><AlertCircle className="w-3 h-3" /> {guestErrors.guestPhone}</p>
+                        )}
                       </div>
                     </div>
                   )}
                   <div className="flex gap-3 mt-6">
                     <Button variant="outline" className="min-h-[48px] px-5" onClick={() => goToStep(1)}>Back</Button>
-                    <Button className="flex-1 btn-glow min-h-[48px] text-base gap-2" onClick={() => goToStep(3)}>
+                    <Button
+                      className="flex-1 btn-glow min-h-[48px] text-base gap-2"
+                      onClick={() => {
+                        if (!isAuthenticated) {
+                          const errs = validateGuest(form);
+                          setGuestTouched({ guestName: true, guestEmail: true, guestPhone: true });
+                          setGuestErrors(errs);
+                          if (Object.keys(errs).length > 0) return;
+                        }
+                        goToStep(3);
+                      }}
+                    >
                       Continue <ChevronRight className="w-4 h-4" />
                     </Button>
                   </div>

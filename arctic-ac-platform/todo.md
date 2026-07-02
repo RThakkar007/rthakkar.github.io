@@ -87,6 +87,16 @@
 - [x] TypeScript: 0 errors after all wiring
 - [x] Tests: 33/33 passing after all wiring
 
+## Client-Side Form Error Handling
+- [x] Contact.tsx — inline field validation (name/email/phone/message), error messages under each field, loading spinner, success screen
+- [x] Booking.tsx — per-step validation: service selection hint (step 0), date+address errors (step 1), guest field validation with inline errors (step 2), final submit guard
+- [x] Booking.tsx — guest fields (name/email/phone) validated before proceeding to payment step
+- [x] Booking.tsx — correct error messages for each failure case (no service, no date, no address, invalid guest fields)
+- [ ] AdminServices dialog — required field validation before mutate
+- [ ] AdminTechnicians dialog — required field validation before mutate
+- [ ] AdminZones dialog — required field validation before mutate
+- [ ] TechLogin — inline validation before submit
+
 ## Responsive & UX Polish
 - [x] Booking flow: auto-scroll to top of card on every step change
 - [x] Booking flow: mobile-friendly calendar and time slot grid
