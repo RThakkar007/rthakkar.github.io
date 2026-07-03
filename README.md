@@ -182,3 +182,11 @@ This certificate above verifies that Ronakkumar Lalitbhai Thakkar successfully c
 
 - [Learn Generative AI for Software Testing.jpg](https://udemy-certificate.s3.amazonaws.com/image/UC-30fb0874-fdb7-45ab-9409-f688663b9de4.jpg)
 - [Learn Generative AI for Software Testing.pdf](https://udemy-certificate.s3.amazonaws.com/pdf/UC-30fb0874-fdb7-45ab-9409-f688663b9de4.pdf)
+
+**17**
+
+This certificate above verifies that Ronakkumar Lalitbhai Thakkar successfully completed the course [Claude Code - The Practical Guide](https://tm.udemy.com/certificate/UC-166671bb-443a-45cb-9fc4-56986ec6946b/) on 07/03/2026 as taught by undefined on Udemy. The certificate indicates the entire course was completed as validated by the student. The course length represents the total hours of the videos and article lectures of the course at the time of most recent completion.
+
+- [Claude Code - The Practical Guide.pdf](https://udemy-certificate.s3.amazonaws.com/pdf/UC-166671bb-443a-45cb-9fc4-56986ec6946b.pdf)
+- [Claude Code - The Practical Guide.jpg](https://udemy-certificate.s3.amazonaws.com/image/UC-166671bb-443a-45cb-9fc4-56986ec6946b.jpg)
+
