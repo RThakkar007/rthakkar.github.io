@@ -1,6 +1,7 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Route, Switch, Router as WouterRouter } from "wouter";
+import { useHashLocation } from "wouter/use-hash-location";
 import { lazy, Suspense } from "react";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
@@ -84,14 +85,13 @@ function Router() {
 }
 
 function App() {
-  const base = import.meta.env.VITE_BASE_PATH?.replace(/\/$/, "") || "";
   return (
     <ErrorBoundary>
       <ThemeProvider defaultTheme="dark" switchable>
         <LanguageProvider>
           <TooltipProvider>
             <Toaster />
-            <WouterRouter base={base}>
+            <WouterRouter hook={useHashLocation}>
               <Router />
             </WouterRouter>
             <WhatsAppCTA />
