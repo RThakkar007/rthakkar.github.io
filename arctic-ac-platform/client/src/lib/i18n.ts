@@ -7,6 +7,7 @@ export interface Translations {
   // Navbar
   nav_home: string;
   nav_services: string;
+  nav_technicians: string;
   nav_book: string;
   nav_about: string;
   nav_contact: string;
@@ -209,6 +210,7 @@ export const translations: Record<Language, Translations> = {
   en: {
     nav_home: "Home",
     nav_services: "Services",
+    nav_technicians: "Find Technician",
     nav_book: "Book Now",
     nav_about: "About",
     nav_contact: "Contact",
@@ -390,6 +392,7 @@ export const translations: Record<Language, Translations> = {
   hi: {
     nav_home: "होम",
     nav_services: "सेवाएं",
+    nav_technicians: "तकनीशियन खोजें",
     nav_book: "बुक करें",
     nav_about: "हमारे बारे में",
     nav_contact: "संपर्क",
@@ -571,6 +574,7 @@ export const translations: Record<Language, Translations> = {
   gu: {
     nav_home: "હોમ",
     nav_services: "સેવાઓ",
+    nav_technicians: "ટેકનિશિયન શોધો",
     nav_book: "બુક કરો",
     nav_about: "અમારા વિશે",
     nav_contact: "સંપર્ક",

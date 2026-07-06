@@ -1,6 +1,6 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { Route, Switch } from "wouter";
+import { Route, Switch, Router as WouterRouter } from "wouter";
 import { lazy, Suspense } from "react";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
@@ -25,6 +25,7 @@ const Login = lazy(() => import("./pages/Login"));
 const Register = lazy(() => import("./pages/Register"));
 const ForgotPassword = lazy(() => import("./pages/ForgotPassword"));
 const NotFound = lazy(() => import("./pages/NotFound"));
+const Technicians = lazy(() => import("./pages/Technicians"));
 // Admin pages (heavy — only loaded when admin visits /admin/*)
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
 const AdminBookings = lazy(() => import("./pages/admin/AdminBookings"));
@@ -52,6 +53,7 @@ function Router() {
         <Route path="/booking/confirmation/:ref" component={BookingConfirmation} />
         <Route path="/track/:ref" component={TrackBooking} />
         <Route path="/my-bookings" component={MyBookings} />
+        <Route path="/technicians" component={Technicians} />
         <Route path="/about" component={About} />
         <Route path="/contact" component={Contact} />
         <Route path="/terms" component={Terms} />
@@ -82,13 +84,16 @@ function Router() {
 }
 
 function App() {
+  const base = import.meta.env.VITE_BASE_PATH?.replace(/\/$/, "") || "";
   return (
     <ErrorBoundary>
       <ThemeProvider defaultTheme="dark" switchable>
         <LanguageProvider>
           <TooltipProvider>
             <Toaster />
-            <Router />
+            <WouterRouter base={base}>
+              <Router />
+            </WouterRouter>
             <WhatsAppCTA />
           </TooltipProvider>
         </LanguageProvider>
