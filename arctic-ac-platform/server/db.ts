@@ -75,6 +75,40 @@ export async function getUserById(id: number) {
   return result[0];
 }
 
+export async function getUserByEmail(email: string) {
+  const db = await getDb();
+  if (!db) return undefined;
+  const result = await db.select().from(users).where(eq(users.email, email)).limit(1);
+  return result[0];
+}
+
+export async function createUserWithPassword(data: {
+  name: string;
+  email: string;
+  phone: string;
+  passwordHash: string;
+}) {
+  const db = await getDb();
+  if (!db) throw new Error("DB unavailable");
+  await db.insert(users).values({
+    name: data.name,
+    email: data.email,
+    phone: data.phone,
+    passwordHash: data.passwordHash,
+    loginMethod: "email",
+    role: "user",
+    lastSignedIn: new Date(),
+  } as any);
+  const created = await getUserByEmail(data.email);
+  return created!;
+}
+
+export async function updateUserLastSignedIn(id: number) {
+  const db = await getDb();
+  if (!db) return;
+  await db.update(users).set({ lastSignedIn: new Date() }).where(eq(users.id, id));
+}
+
 // ─── Services ────────────────────────────────────────────────────────────────
 export async function getAllServices() {
   const db = await getDb();

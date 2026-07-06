@@ -42,6 +42,11 @@ import {
   updateZone,
   getUserByOpenId,
 } from "./db";
+import {
+  getUserByEmail,
+  createUserWithPassword,
+  updateUserLastSignedIn,
+} from "./db";
 import { storagePut } from "./storage";
 import { ENV } from "./_core/env";
 import { SignJWT, jwtVerify } from "jose";
@@ -608,6 +613,56 @@ export const appRouter = router({
       ctx.res.clearCookie(COOKIE_NAME, { ...cookieOptions, maxAge: -1 });
       return { success: true } as const;
     }),
+    register: publicProcedure
+      .input(z.object({
+        name: z.string().min(2, "Name must be at least 2 characters"),
+        email: z.string().email("Invalid email address"),
+        phone: z.string().min(10, "Phone must be at least 10 digits").max(15),
+        password: z.string().min(6, "Password must be at least 6 characters"),
+      }))
+      .mutation(async ({ input, ctx }) => {
+        const existing = await getUserByEmail(input.email);
+        if (existing) {
+          throw new TRPCError({ code: "CONFLICT", message: "Email already registered. Please log in." });
+        }
+        const passwordHash = await bcrypt.hash(input.password, 10);
+        const user = await createUserWithPassword({
+          name: input.name,
+          email: input.email,
+          phone: input.phone,
+          passwordHash,
+        });
+        const token = await new SignJWT({ id: user.id, openId: `email:${user.id}`, role: user.role })
+          .setProtectedHeader({ alg: "HS256" })
+          .setExpirationTime("7d")
+          .sign(JWT_SECRET);
+        const cookieOptions = getSessionCookieOptions(ctx.req);
+        ctx.res.cookie(COOKIE_NAME, token, cookieOptions);
+        return { success: true, user: { id: user.id, name: user.name, email: user.email, role: user.role } };
+      }),
+    login: publicProcedure
+      .input(z.object({
+        email: z.string().email("Invalid email address"),
+        password: z.string().min(1, "Password is required"),
+      }))
+      .mutation(async ({ input, ctx }) => {
+        const user = await getUserByEmail(input.email);
+        if (!user || !user.passwordHash) {
+          throw new TRPCError({ code: "UNAUTHORIZED", message: "Invalid email or password." });
+        }
+        const valid = await bcrypt.compare(input.password, user.passwordHash);
+        if (!valid) {
+          throw new TRPCError({ code: "UNAUTHORIZED", message: "Invalid email or password." });
+        }
+        await updateUserLastSignedIn(user.id);
+        const token = await new SignJWT({ id: user.id, openId: `email:${user.id}`, role: user.role })
+          .setProtectedHeader({ alg: "HS256" })
+          .setExpirationTime("7d")
+          .sign(JWT_SECRET);
+        const cookieOptions = getSessionCookieOptions(ctx.req);
+        ctx.res.cookie(COOKIE_NAME, token, cookieOptions);
+        return { success: true, user: { id: user.id, name: user.name, email: user.email, role: user.role } };
+      }),
   }),
   services: servicesRouter,
   zones: zonesRouter,
