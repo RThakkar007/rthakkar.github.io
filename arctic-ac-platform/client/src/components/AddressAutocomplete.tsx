@@ -3,10 +3,17 @@ import { MapPin, Navigation, Loader2, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
-// MapMyIndia (Mappls) Autosuggest API — free, India-focused
-// Requires VITE_MAPPLS_API_KEY in env. Falls back to plain input if not set.
+// Mappls (MapMyIndia) REST API — static key used directly as access_token
+// Docs: https://developer.mappls.com/mapping/autosuggest-api/
 const MAPPLS_KEY = import.meta.env.VITE_MAPPLS_API_KEY as string | undefined;
-const AUTOSUGGEST_URL = "https://search.mappls.com/search/places/autosuggest/json";
+
+const AUTOSUGGEST_URL =
+  "https://search.mappls.com/search/places/autosuggest/json";
+
+// Mappls Reverse Geocode REST API
+// Docs: https://developer.mappls.com/mapping/reverse-geocoding-api/
+const REVERSE_GEOCODE_URL =
+  "https://apis.mappls.com/advancedmaps/v1";
 
 interface Suggestion {
   placeName: string;
@@ -40,44 +47,53 @@ export default function AddressAutocomplete({ value, onChange, error }: Props) {
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        (pos) => setUserLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
+        (pos) =>
+          setUserLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
         () => {}, // silent fail
         { timeout: 5000, maximumAge: 300000 }
       );
     }
   }, []);
 
-  const fetchSuggestions = useCallback(async (query: string) => {
-    if (!MAPPLS_KEY || query.length < 3) {
-      setSuggestions([]);
-      setShowDropdown(false);
-      return;
-    }
-    setLoading(true);
-    try {
-      const params = new URLSearchParams({
-        query,
-        access_token: MAPPLS_KEY,
-        region: "IND",
-        ...(userLocation ? { location: `${userLocation.lat},${userLocation.lng}` } : {}),
-      });
-      const res = await fetch(`${AUTOSUGGEST_URL}?${params}`);
-      if (!res.ok) throw new Error("API error");
-      const data = await res.json();
-      const results: Suggestion[] = (data.suggestedLocations ?? []).slice(0, 6).map((s: any) => ({
-        placeName: s.placeName ?? "",
-        placeAddress: s.placeAddress ?? "",
-        eLoc: s.eLoc ?? "",
-      }));
-      setSuggestions(results);
-      setShowDropdown(results.length > 0);
-    } catch {
-      setSuggestions([]);
-      setShowDropdown(false);
-    } finally {
-      setLoading(false);
-    }
-  }, [userLocation, MAPPLS_KEY]);
+  const fetchSuggestions = useCallback(
+    async (query: string) => {
+      if (!MAPPLS_KEY || query.length < 3) {
+        setSuggestions([]);
+        setShowDropdown(false);
+        return;
+      }
+      setLoading(true);
+      try {
+        const params = new URLSearchParams({
+          query,
+          access_token: MAPPLS_KEY,
+          region: "IND",
+          ...(userLocation
+            ? { location: `${userLocation.lat},${userLocation.lng}` }
+            : {}),
+        });
+        const res = await fetch(`${AUTOSUGGEST_URL}?${params}`);
+        if (!res.ok) throw new Error(`Mappls API error: ${res.status}`);
+        const data = await res.json();
+        const results: Suggestion[] = (data.suggestedLocations ?? [])
+          .slice(0, 6)
+          .map((s: any) => ({
+            placeName: s.placeName ?? "",
+            placeAddress: s.placeAddress ?? "",
+            eLoc: s.eLoc ?? "",
+          }));
+        setSuggestions(results);
+        setShowDropdown(results.length > 0);
+      } catch (err) {
+        console.warn("Mappls autosuggest error:", err);
+        setSuggestions([]);
+        setShowDropdown(false);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [userLocation]
+  );
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
@@ -88,7 +104,9 @@ export default function AddressAutocomplete({ value, onChange, error }: Props) {
   };
 
   const handleSelect = (s: Suggestion) => {
-    const full = s.placeAddress ? `${s.placeName}, ${s.placeAddress}` : s.placeName;
+    const full = s.placeAddress
+      ? `${s.placeName}, ${s.placeAddress}`
+      : s.placeName;
     setInputValue(full);
     onChange(full);
     setSuggestions([]);
@@ -101,19 +119,31 @@ export default function AddressAutocomplete({ value, onChange, error }: Props) {
     onChange("");
     setSuggestions([]);
     setShowDropdown(false);
-    if (inputRef.current) { inputRef.current.value = ""; inputRef.current.focus(); }
+    if (inputRef.current) {
+      inputRef.current.value = "";
+      inputRef.current.focus();
+    }
   };
 
-  // Reverse geocode using Mappls REST API
-  const reverseGeocode = async (lat: number, lng: number): Promise<string | null> => {
+  // Mappls Reverse Geocode REST API
+  // Endpoint: GET /advancedmaps/v1/{key}/rev_geocode?lat=...&lng=...
+  const reverseGeocode = async (
+    lat: number,
+    lng: number
+  ): Promise<string | null> => {
     if (!MAPPLS_KEY) return null;
     try {
       const res = await fetch(
-        `https://atlas.mappls.com/api/places/geocode?access_token=${MAPPLS_KEY}&lat=${lat}&lng=${lng}`
+        `${REVERSE_GEOCODE_URL}/${MAPPLS_KEY}/rev_geocode?lat=${lat}&lng=${lng}`
       );
       if (!res.ok) return null;
       const data = await res.json();
-      return data?.results?.[0]?.formatted_address ?? null;
+      // Response: { results: [{ formatted_address, ... }] }
+      const addr =
+        data?.results?.[0]?.formatted_address ??
+        data?.results?.[0]?.address ??
+        null;
+      return addr;
     } catch {
       return null;
     }
@@ -129,7 +159,7 @@ export default function AddressAutocomplete({ value, onChange, error }: Props) {
       async (pos) => {
         const { latitude, longitude } = pos.coords;
         setUserLocation({ lat: latitude, lng: longitude });
-        // Try Mappls reverse geocode first
+        // Try Mappls reverse geocode
         const addr = await reverseGeocode(latitude, longitude);
         if (addr) {
           setInputValue(addr);
@@ -163,7 +193,9 @@ export default function AddressAutocomplete({ value, onChange, error }: Props) {
       <div className="relative">
         <div
           className={`relative rounded-md border bg-background transition-colors ${
-            error ? "border-red-500" : "border-input hover:border-primary/40"
+            error
+              ? "border-red-500"
+              : "border-input hover:border-primary/40 focus-within:border-primary"
           }`}
         >
           <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none z-10" />
@@ -174,12 +206,18 @@ export default function AddressAutocomplete({ value, onChange, error }: Props) {
             onChange={handleInputChange}
             onFocus={() => suggestions.length > 0 && setShowDropdown(true)}
             onBlur={() => setTimeout(() => setShowDropdown(false), 200)}
-            placeholder={MAPPLS_KEY ? "Start typing your address..." : "Enter your full address..."}
+            placeholder={
+              MAPPLS_KEY
+                ? "Start typing your address..."
+                : "Enter your full address..."
+            }
             autoComplete="off"
             className="w-full pl-9 pr-10 py-3 bg-transparent text-foreground text-sm focus:outline-none rounded-md min-h-[44px]"
           />
           <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1">
-            {loading && <Loader2 className="w-4 h-4 animate-spin text-muted-foreground" />}
+            {loading && (
+              <Loader2 className="w-4 h-4 animate-spin text-muted-foreground" />
+            )}
             {inputValue && !loading && (
               <button
                 type="button"
@@ -194,8 +232,10 @@ export default function AddressAutocomplete({ value, onChange, error }: Props) {
 
         {/* Suggestions dropdown */}
         {showDropdown && suggestions.length > 0 && (
-          <div className="absolute top-full left-0 right-0 mt-1 z-50 rounded-xl border border-white/10
-            bg-[#0d1117] shadow-2xl shadow-black/40 overflow-hidden max-h-72 overflow-y-auto">
+          <div
+            className="absolute top-full left-0 right-0 mt-1 z-50 rounded-xl border border-white/10
+            bg-[#0d1117] shadow-2xl shadow-black/40 overflow-hidden max-h-72 overflow-y-auto"
+          >
             {suggestions.map((s, i) => (
               <button
                 key={s.eLoc || i}
@@ -206,15 +246,19 @@ export default function AddressAutocomplete({ value, onChange, error }: Props) {
               >
                 <MapPin className="w-4 h-4 text-cyan-400 mt-0.5 shrink-0" />
                 <div className="min-w-0">
-                  <p className="text-sm font-medium text-white truncate">{s.placeName}</p>
+                  <p className="text-sm font-medium text-white truncate">
+                    {s.placeName}
+                  </p>
                   {s.placeAddress && (
-                    <p className="text-xs text-slate-400 truncate mt-0.5">{s.placeAddress}</p>
+                    <p className="text-xs text-slate-400 truncate mt-0.5">
+                      {s.placeAddress}
+                    </p>
                   )}
                 </div>
               </button>
             ))}
             <div className="px-4 py-2 text-xs text-slate-600 text-right">
-              Powered by MapMyIndia
+              Powered by Mappls
             </div>
           </div>
         )}
@@ -230,19 +274,20 @@ export default function AddressAutocomplete({ value, onChange, error }: Props) {
         disabled={locating}
       >
         {locating ? (
-          <><Loader2 className="w-4 h-4 animate-spin" /> Detecting your location...</>
+          <>
+            <Loader2 className="w-4 h-4 animate-spin" /> Detecting your
+            location...
+          </>
         ) : (
-          <><Navigation className="w-4 h-4" /> Use My Current Location</>
+          <>
+            <Navigation className="w-4 h-4" /> Use My Current Location
+          </>
         )}
       </Button>
 
       {error && (
-        <p className="text-xs text-red-400">Please enter a complete address (at least 5 characters).</p>
-      )}
-
-      {!MAPPLS_KEY && (
-        <p className="text-xs text-slate-500">
-          💡 Add <code className="text-cyan-400">VITE_MAPPLS_API_KEY</code> in Settings → Secrets to enable address suggestions.
+        <p className="text-xs text-red-400">
+          Please enter a complete address (at least 5 characters).
         </p>
       )}
     </div>
