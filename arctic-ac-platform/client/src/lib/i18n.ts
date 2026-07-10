@@ -267,7 +267,7 @@ export const translations: Record<Language, Translations> = {
     faq_q3: "Is there a service charge if the problem isn't fixed?",
     faq_a3: "A minimal diagnostic fee applies if the issue cannot be resolved. We'll inform you before any additional charges.",
     faq_q4: "How do I track my technician?",
-    faq_a4: "After booking confirmation, you'll receive a tracking link. You can also track at arcticac.in/track using your booking reference number.",
+    faq_a4: "After booking confirmation, you'll receive a tracking link. You can also track at rthakkargithubio-production.up.railway.app/track using your booking reference number.",
     faq_q5: "What payment methods are accepted?",
     faq_a5: "We accept Cash on Delivery (COD) as default. Online payment via Razorpay (UPI, cards, net banking) is also available.",
     faq_q6: "Can I reschedule or cancel my booking?",

@@ -4,7 +4,7 @@ import { MessageCircle } from "lucide-react";
  * Floating WhatsApp CTA button — visible on all customer pages.
  * Phone number is configurable via the VITE_WHATSAPP_NUMBER env var (fallback to a placeholder).
  */
-const WHATSAPP_NUMBER = (import.meta.env.VITE_WHATSAPP_NUMBER as string) || "919999999999";
+const WHATSAPP_NUMBER = (import.meta.env.VITE_WHATSAPP_NUMBER as string) || "919904089393";
 const WHATSAPP_MESSAGE = encodeURIComponent("Hi! I need help with my AC service booking.");
 
 export function WhatsAppCTA() {

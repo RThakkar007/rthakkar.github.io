@@ -22,13 +22,13 @@ export default function Footer() {
             </p>
             <div className="mt-4 flex flex-col gap-2">
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Phone className="w-4 h-4 text-primary" /> +91 98765 43210
+                <Phone className="w-4 h-4 text-primary" /> +91 99040 89393
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Mail className="w-4 h-4 text-primary" /> support@arcticac.in
+                <Mail className="w-4 h-4 text-primary" /> info.ronakenterprise@gmail.com
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <MapPin className="w-4 h-4 text-primary" /> Ahmedabad, Gujarat
+                <MapPin className="w-4 h-4 text-primary" /> Patan, Gujarat 384 265
               </div>
             </div>
           </div>

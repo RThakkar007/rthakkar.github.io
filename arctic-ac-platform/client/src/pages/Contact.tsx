@@ -95,9 +95,9 @@ export default function Contact() {
             <div>
               <div className="space-y-6 mb-8">
                 {[
-                  { icon: Phone, label: "Phone", value: "+91 98765 43210" },
-                  { icon: Mail, label: "Email", value: "support@arcticac.in" },
-                  { icon: MapPin, label: "Address", value: "Ahmedabad, Gujarat, India" },
+                  { icon: Phone, label: "Phone", value: "+91 99040 89393" },
+                  { icon: Mail, label: "Email", value: "info.ronakenterprise@gmail.com" },
+                  { icon: MapPin, label: "Address", value: "HO: Patan, Gujarat 384 265" },
                   { icon: Clock, label: "Hours", value: "24/7 — Emergency services available" },
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-4">
@@ -159,7 +159,7 @@ export default function Contact() {
                         onChange={e => handleChange("phone", e.target.value)}
                         onBlur={() => handleBlur("phone")}
                         autoComplete="tel"
-                        placeholder="+91 98765 43210"
+                        placeholder="+91 99040 89393"
                       />
                       <FieldError field="phone" />
                     </div>

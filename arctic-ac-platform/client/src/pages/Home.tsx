@@ -303,7 +303,7 @@ export default function Home() {
                     Book a Service <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
-                <a href="tel:+919999999999">
+                <a href="tel:+919904089393">
                   <Button size="lg" variant="outline" className="h-12 px-8 text-base border-border hover:border-primary hover:text-primary">
                     <Phone className="mr-2 h-4 w-4" /> Call Us Now
                   </Button>
