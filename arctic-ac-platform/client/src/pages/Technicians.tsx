@@ -26,7 +26,7 @@ const TECHNICIANS = [
     area: "Shankheshwar Road",
     isAvailable: true,
     isVerified: true,
-    phone: "+91 98765 43210",
+    phone: "+91 99040 89393",
     specializations: ["Split AC", "Inverter AC", "Gas Refill"],
     completedJobs: 534,
     avatar: "RK",
