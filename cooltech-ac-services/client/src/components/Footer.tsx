@@ -68,15 +68,15 @@ export default function Footer() {
             <ul className="space-y-3 text-sm">
               <li className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-accent flex-shrink-0" />
-                <span>+91 99040 89393</span>
+                <a href="https://wa.me/919904089393" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">+91 9904089393</a>
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-accent flex-shrink-0" />
-                <span>info.ronakenterprise@gmail.com</span>
+                <a href="mailto:info.ronakenterprise@gmail.com" className="hover:text-white transition-colors">info.ronakenterprise@gmail.com</a>
               </li>
               <li className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
-                <span>Patan, Gujarat 384 265, India</span>
+                <span>HO: Patan, Gujarat 384 265.</span>
               </li>
             </ul>
           </div>

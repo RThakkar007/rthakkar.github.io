@@ -273,7 +273,7 @@ export default function Home() {
             <Link href="/services"><Button size="lg" className="bg-white text-primary hover:bg-white/90 font-bold btn-scale px-8">Browse Services</Button></Link>
             <Link href="/technicians"><Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 btn-scale px-8"><MapPin className="w-4 h-4 mr-2" /> Find Technician Near Me</Button></Link>
           </div>
-          <div className="mt-8 flex items-center justify-center gap-2 text-white/60 text-sm"><Phone className="w-4 h-4" /><span>Call us: +91 99040 89393</span></div>
+          <div className="mt-8 flex items-center justify-center gap-2 text-white/60 text-sm"><Phone className="w-4 h-4" /><span>Call us: +91 9904089393</span></div>
         </div>
       </section>
 

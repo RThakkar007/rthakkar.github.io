@@ -170,7 +170,7 @@ export default function Navbar() {
                 <div className="absolute bottom-0 left-0 right-0 p-4 border-t">
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <Phone className="w-4 h-4" />
-                    <span>+91 99040 89393</span>
+                    <a href="https://wa.me/919904089393" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">+91 9904089393</a>
                   </div>
                 </div>
               </SheetContent>
