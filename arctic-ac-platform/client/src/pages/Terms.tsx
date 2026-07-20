@@ -17,7 +17,7 @@ export default function Terms() {
             <section><h2 className="text-xl font-semibold text-foreground mb-3">3. Booking & Payments</h2><p>All bookings are subject to technician availability. Prices are fixed and displayed before booking. Cash on Delivery (COD) is the default payment method. Online payments via Razorpay are also accepted.</p></section>
             <section><h2 className="text-xl font-semibold text-foreground mb-3">4. User Responsibilities</h2><p>Users must provide accurate information when booking. You are responsible for ensuring safe access to the service location. Misuse of the platform may result in account suspension.</p></section>
             <section><h2 className="text-xl font-semibold text-foreground mb-3">5. Limitation of Liability</h2><p>ArcticAC is not liable for any indirect, incidental, or consequential damages arising from the use of our services. Our liability is limited to the amount paid for the specific service.</p></section>
-            <section><h2 className="text-xl font-semibold text-foreground mb-3">6. Contact</h2><p>For any questions about these terms, contact us at info.ronakenterprise@gmail.com.</p></section>
+            <section><h2 className="text-xl font-semibold text-foreground mb-3">6. Contact</h2><p>For any questions about these terms, contact us at <a href="mailto:info.ronakenterprise@gmail.com" className="text-primary hover:underline">info.ronakenterprise@gmail.com</a>.</p></section>
           </div>
         </div>
       </div>

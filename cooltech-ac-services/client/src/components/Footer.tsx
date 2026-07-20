@@ -68,7 +68,7 @@ export default function Footer() {
             <ul className="space-y-3 text-sm">
               <li className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-accent flex-shrink-0" />
-                <a href="https://wa.me/919904089393" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">+91 9904089393</a>
+                <a href="tel:+919904089393" className="hover:text-white transition-colors">+91 9904089393</a>
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-accent flex-shrink-0" />
@@ -76,7 +76,7 @@ export default function Footer() {
               </li>
               <li className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
-                <span>HO: Patan, Gujarat 384 265.</span>
+                <a href="https://maps.google.com/?q=Patan,Gujarat,India" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">HO: Patan, Gujarat 384 265.</a>
               </li>
             </ul>
           </div>

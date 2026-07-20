@@ -22,13 +22,13 @@ export default function Footer() {
             </p>
             <div className="mt-4 flex flex-col gap-2">
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Phone className="w-4 h-4 text-primary" /> +91 99040 89393
+                <Phone className="w-4 h-4 text-primary" /> <a href="tel:+919904089393" className="hover:text-primary transition-colors">+91 9904089393</a>
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Mail className="w-4 h-4 text-primary" /> info.ronakenterprise@gmail.com
+                <Mail className="w-4 h-4 text-primary" /> <a href="mailto:info.ronakenterprise@gmail.com" className="hover:text-primary transition-colors">info.ronakenterprise@gmail.com</a>
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <MapPin className="w-4 h-4 text-primary" /> Patan, Gujarat 384 265
+                <MapPin className="w-4 h-4 text-primary" /> <a href="https://maps.google.com/?q=Patan,Gujarat,India" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">HO: Patan, Gujarat 384 265.</a>
               </div>
             </div>
           </div>

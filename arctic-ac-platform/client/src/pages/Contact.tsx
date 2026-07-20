@@ -94,19 +94,22 @@ export default function Contact() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
             <div>
               <div className="space-y-6 mb-8">
-                {[
-                  { icon: Phone, label: "Phone", value: "+91 99040 89393" },
-                  { icon: Mail, label: "Email", value: "info.ronakenterprise@gmail.com" },
-                  { icon: MapPin, label: "Address", value: "HO: Patan, Gujarat 384 265" },
-                  { icon: Clock, label: "Hours", value: "24/7 — Emergency services available" },
-                ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <item.icon className="w-5 h-5 text-primary" />
-                    </div>
-                    <div><div className="text-sm text-muted-foreground">{item.label}</div><div className="font-medium">{item.value}</div></div>
-                  </div>
-                ))}
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0"><Phone className="w-5 h-5 text-primary" /></div>
+                  <div><div className="text-sm text-muted-foreground">Phone</div><a href="tel:+919904089393" className="font-medium hover:text-primary transition-colors">+91 9904089393</a></div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0"><Mail className="w-5 h-5 text-primary" /></div>
+                  <div><div className="text-sm text-muted-foreground">Email</div><a href="mailto:info.ronakenterprise@gmail.com" className="font-medium hover:text-primary transition-colors">info.ronakenterprise@gmail.com</a></div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0"><MapPin className="w-5 h-5 text-primary" /></div>
+                  <div><div className="text-sm text-muted-foreground">Address</div><a href="https://maps.google.com/?q=Patan,Gujarat,India" target="_blank" rel="noopener noreferrer" className="font-medium hover:text-primary transition-colors">HO: Patan, Gujarat 384 265.</a></div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0"><Clock className="w-5 h-5 text-primary" /></div>
+                  <div><div className="text-sm text-muted-foreground">Hours</div><div className="font-medium">24/7 — Emergency services available</div></div>
+                </div>
               </div>
             </div>
             <Card className="glass-card">

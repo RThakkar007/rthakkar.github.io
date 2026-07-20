@@ -27,7 +27,7 @@ export default function Cancellation() {
                 <li>If the service quality is unsatisfactory, contact us within 24 hours for a free revisit or refund.</li>
               </ul>
             </section>
-            <section><h2 className="text-xl font-semibold text-foreground mb-3">How to Cancel</h2><p>Cancel through your My Bookings page or contact our support team at info.ronakenterprise@gmail.com or +91 99040 89393.</p></section>
+            <section><h2 className="text-xl font-semibold text-foreground mb-3">How to Cancel</h2><p>Cancel through your My Bookings page or contact our support team at <a href="mailto:info.ronakenterprise@gmail.com" className="text-primary hover:underline">info.ronakenterprise@gmail.com</a> or <a href="tel:+919904089393" className="text-primary hover:underline">+91 9904089393</a>.</p></section>
           </div>
         </div>
       </div>
