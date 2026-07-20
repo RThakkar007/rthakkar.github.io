@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import StarRating from "@/components/StarRating";
 import ServiceCard from "@/components/ServiceCard";
 import { trpc } from "@/lib/trpc";
+import { PriceEstimator } from "@/components/PriceEstimator";
 import {
   Snowflake, MapPin, Shield, Award, Wrench, Zap, CheckCircle, Star,
   ArrowRight, Phone, Clock, ChevronRight, Wind,
@@ -173,6 +174,17 @@ export default function Home() {
       </section>
 
       {/* How It Works */}
+      {/* Price Estimator — Item #7 */}
+      <section className="py-12 bg-white">
+        <div className="container max-w-3xl">
+          <div className="text-center mb-6">
+            <h2 className="text-2xl font-bold text-foreground mb-2" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>How Much Will It Cost?</h2>
+            <p className="text-muted-foreground text-sm">Get an instant estimate before you book — no surprises.</p>
+          </div>
+          <PriceEstimator />
+        </div>
+      </section>
+
       <section className="py-16 bg-white">
         <div className="container">
           <div className="text-center mb-12">

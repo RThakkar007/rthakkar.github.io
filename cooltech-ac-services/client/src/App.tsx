@@ -5,6 +5,8 @@ import { lazy, Suspense } from "react";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { WhatsAppCTA } from "./components/WhatsAppCTA";
+import { FloatingBookNow } from "./components/FloatingBookNow";
 
 const Home = lazy(() => import("./pages/Home"));
 const Services = lazy(() => import("./pages/Services"));
@@ -51,6 +53,8 @@ function App() {
         <TooltipProvider>
           <Toaster richColors position="top-right" />
           <Router />
+          <WhatsAppCTA />
+          <FloatingBookNow />
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>

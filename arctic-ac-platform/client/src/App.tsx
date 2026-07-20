@@ -7,6 +7,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { WhatsAppCTA } from "./components/WhatsAppCTA";
 import { PageLoader } from "./components/PageLoader";
+import { FloatingBookNow } from "./components/FloatingBookNow";
 
 // ── Lazy-loaded routes (code splitting — only load what the user visits) ──────
 // Customer pages
@@ -94,6 +95,7 @@ function App() {
               <Router />
             </WouterRouter>
             <WhatsAppCTA />
+            <FloatingBookNow />
           </TooltipProvider>
         </LanguageProvider>
       </ThemeProvider>

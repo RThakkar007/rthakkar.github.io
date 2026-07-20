@@ -128,6 +128,14 @@ export default function Navbar() {
 
             {/* Mobile menu */}
             <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
+              {/* Mobile call button — Item #11 */}
+              <a
+                href="tel:+919904089393"
+                className="md:hidden p-2 rounded-lg flex items-center justify-center bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
+                aria-label="Call CoolTech"
+              >
+                <Phone className="w-4 h-4" />
+              </a>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className="md:hidden">
                   <Menu className="w-5 h-5" />

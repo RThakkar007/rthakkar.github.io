@@ -10,15 +10,16 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { PriceEstimator } from "@/components/PriceEstimator";
 
 // ── Data ─────────────────────────────────────────────────────────────────────
 const SERVICES = [
-  { icon: Wrench, name: "AC Repair", price: "₹499", desc: "Fast diagnosis & fix for all AC faults", popular: false },
-  { icon: Snowflake, name: "Gas Refill", price: "₹799", desc: "Refrigerant top-up with leak check", popular: true },
-  { icon: Zap, name: "Installation", price: "₹1,299", desc: "Expert installation of split & window ACs", popular: false },
-  { icon: Shield, name: "Annual AMC", price: "₹1,999/yr", desc: "2 services + priority support all year", popular: false },
-  { icon: CheckCircle2, name: "Deep Cleaning", price: "₹599", desc: "Full coil & filter cleaning for better cooling", popular: false },
-  { icon: Star, name: "Uninstallation", price: "₹399", desc: "Safe removal & packing of your AC unit", popular: false },
+  { icon: Wrench,       name: "AC Repair",     price: "₹499",      desc: "Fast diagnosis & fix for all AC faults",          popular: false, available: true,  slot: "Today, 2 PM" },
+  { icon: Snowflake,    name: "Gas Refill",     price: "₹799",      desc: "Refrigerant top-up with leak check",              popular: true,  available: true,  slot: "Today, 4 PM" },
+  { icon: Zap,          name: "Installation",   price: "₹1,299",    desc: "Expert installation of split & window ACs",       popular: false, available: true,  slot: "Tomorrow, 10 AM" },
+  { icon: Shield,       name: "Annual AMC",     price: "₹1,999/yr", desc: "2 services + priority support all year",          popular: false, available: false, slot: "Tomorrow, 2 PM" },
+  { icon: CheckCircle2, name: "Deep Cleaning",  price: "₹599",      desc: "Full coil & filter cleaning for better cooling",  popular: false, available: true,  slot: "Today, 6 PM" },
+  { icon: Star,         name: "Uninstallation", price: "₹399",      desc: "Safe removal & packing of your AC unit",          popular: false, available: true,  slot: "Tomorrow, 9 AM" },
 ];
 
 const HOW_IT_WORKS = [
@@ -136,13 +137,18 @@ export default function Home() {
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-            {SERVICES.map(({ icon: Icon, name, price, desc, popular }) => (
+            {SERVICES.map(({ icon: Icon, name, price, desc, popular, available, slot }) => (
               <div key={name} className={`relative rounded-xl border p-5 transition-all duration-200 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-0.5 ${popular ? "border-primary/40 bg-primary/5" : "border-border bg-card/50"}`}>
                 {popular && (
                   <span className="absolute -top-2.5 left-4 bg-primary text-primary-foreground text-xs font-semibold px-2.5 py-0.5 rounded-full">
                     Most Popular
                   </span>
                 )}
+                {/* Availability badge — Item #4 */}
+                <div className={`inline-flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 rounded-full mb-2 ${available ? "bg-green-500/10 text-green-500" : "bg-yellow-500/10 text-yellow-500"}`}>
+                  <span className={`w-1.5 h-1.5 rounded-full ${available ? "bg-green-500" : "bg-yellow-500"}`} />
+                  {available ? `Next slot: ${slot}` : `Next: ${slot}`}
+                </div>
                 <div className="flex items-start justify-between mb-3">
                   <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
                     <Icon className="h-5 w-5 text-primary" />
@@ -170,6 +176,17 @@ export default function Home() {
       </section>
 
       {/* ── How It Works ── */}
+      {/* ── Price Estimator — Item #7 ── */}
+      <section className="py-12 sm:py-16 bg-card/30">
+        <div className="container max-w-3xl">
+          <div className="text-center mb-6">
+            <h2 className="text-xl sm:text-2xl font-bold mb-2">How Much Will It Cost?</h2>
+            <p className="text-muted-foreground text-sm">Get an instant estimate before you book — no surprises.</p>
+          </div>
+          <PriceEstimator />
+        </div>
+      </section>
+
       <section className="py-16 sm:py-20">
         <div className="container">
           <div className="text-center mb-12">

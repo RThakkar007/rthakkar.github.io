@@ -14,6 +14,7 @@ import { CheckCircle, Calendar, CreditCard, User, Snowflake, ChevronRight, Alert
 import AddressAutocomplete from "@/components/AddressAutocomplete";
 import DateTimePicker from "@/components/DateTimePicker";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { TrustBadges } from "@/components/TrustBadges";
 
 const STEPS = ["Service", "Schedule", "Details", "Payment"];
 
@@ -366,6 +367,9 @@ export default function Booking() {
                   <h2 className="text-lg sm:text-xl font-semibold mb-5 flex items-center gap-2">
                     <CreditCard className="w-5 h-5 text-primary" /> Payment Method
                   </h2>
+                  {/* Trust badges — Item #13 */}
+                  <TrustBadges />
+                  <div className="mt-5" />
                   <div className="space-y-3 mb-6">
                     {[
                       { value: "cod", label: "Cash on Delivery", desc: "Pay in cash when the technician arrives.", icon: "💵" },

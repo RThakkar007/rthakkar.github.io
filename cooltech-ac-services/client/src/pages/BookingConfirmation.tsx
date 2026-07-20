@@ -8,7 +8,7 @@ import StarRating from "@/components/StarRating";
 import { trpc } from "@/lib/trpc";
 import {
   CheckCircle, Calendar, Clock, MapPin, Phone, MessageSquare,
-  Navigation, Snowflake, ArrowRight, User, Shield
+  Navigation, Snowflake, ArrowRight, User, Shield, Bell, MessageCircle
 } from "lucide-react";
 
 export default function BookingConfirmation() {
@@ -16,6 +16,12 @@ export default function BookingConfirmation() {
   const id = parseInt(bookingId ?? "0");
 
   const { data: booking, isLoading } = trpc.bookings.getById.useQuery({ id }, { enabled: !!id });
+
+  // WhatsApp share message — Item #6
+  const waMessage = encodeURIComponent(
+    `Hi CoolTech! My booking is confirmed 🎉\nBooking ID: #${id}\nService: AC Service\nPlease keep me updated. Thank you!`
+  );
+  const waHref = `https://wa.me/919904089393?text=${waMessage}`;
 
   // Load the technician assigned to this specific booking
   const technicianId = booking?.technicianId ?? 0;
@@ -50,6 +56,13 @@ export default function BookingConfirmation() {
             <p className="text-muted-foreground">
               Your AC service has been booked successfully. Booking ID: <strong>#{id}</strong>
             </p>
+            {/* Booking reminder banner — Item #12 */}
+            <div className="flex items-start gap-3 bg-blue-50 border border-blue-200 rounded-xl px-4 py-3 mt-4 text-left">
+              <Bell className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
+              <p className="text-sm text-blue-800">
+                <strong>Reminder set!</strong> We'll send you a WhatsApp reminder <strong>1 hour before</strong> your appointment so you're ready when the technician arrives.
+              </p>
+            </div>
           </div>
 
           {/* Booking Details */}
@@ -188,6 +201,12 @@ export default function BookingConfirmation() {
                 <Navigation className="w-4 h-4" /> Track Technician Live
               </Button>
             </Link>
+            {/* WhatsApp share button — Item #6 */}
+            <a href={waHref} target="_blank" rel="noopener noreferrer" className="flex-1">
+              <Button className="w-full bg-[#25D366] hover:bg-[#1ebe5d] text-white border-0 gap-2">
+                <MessageCircle className="w-4 h-4" /> Share on WhatsApp
+              </Button>
+            </a>
             <Link href="/bookings" className="flex-1">
               <Button variant="outline" className="w-full gap-2">
                 My Bookings <ArrowRight className="w-4 h-4" />

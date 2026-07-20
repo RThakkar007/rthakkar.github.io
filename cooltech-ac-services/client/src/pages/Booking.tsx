@@ -12,6 +12,7 @@ import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { getLoginUrl } from "@/const";
 import { toast } from "sonner";
+import { TrustBadges } from "@/components/TrustBadges";
 import {
   CheckCircle2, Clock, MapPin, CreditCard, ChevronRight,
   Calendar, Snowflake, ArrowLeft, User, Phone, Home, Loader2
@@ -326,6 +327,8 @@ export default function Booking() {
                   {step === 3 && (
                     <div>
                       <h2 className="text-xl font-bold mb-4 flex items-center gap-2"><CreditCard className="w-5 h-5 text-primary" /> Payment</h2>
+                      {/* Trust badges — Item #13 */}
+                      <TrustBadges />
 
                       {!isAuthenticated ? (
                         <div className="text-center py-8">

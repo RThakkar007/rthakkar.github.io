@@ -3,7 +3,7 @@ import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { getLoginUrl } from "@/const";
-import { Snowflake, Menu, X, Bell, User, LogOut, LayoutDashboard, ChevronRight } from "lucide-react";
+import { Snowflake, Menu, X, Bell, User, LogOut, LayoutDashboard, ChevronRight, Phone } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import { ThemeToggle } from "./ThemeToggle";
 import { LanguageSwitcher } from "./LanguageSwitcher";
@@ -119,6 +119,14 @@ export default function Navbar() {
 
           {/* Mobile: bell + hamburger */}
           <div className="flex md:hidden items-center gap-1">
+            {/* Mobile call button — Item #11 */}
+            <a
+              href="tel:+919904089393"
+              className="p-2 rounded-lg min-w-[44px] min-h-[44px] flex items-center justify-center bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
+              aria-label="Call ArcticAC"
+            >
+              <Phone className="w-4 h-4" />
+            </a>
             {isAuthenticated && (
               <Link href="/my-bookings" className="relative p-2 rounded-lg min-w-[44px] min-h-[44px] flex items-center justify-center">
                 <Bell className="w-5 h-5 text-muted-foreground" />
